@@ -12,10 +12,11 @@ pages_build_output_dir = "./dist"
 # binding = "MY_BUCKET"
 # bucket_name = "my-bucket"
 
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "my-database"
-# database_id = ""
+[[d1_databases]]
+binding = "DB"
+database_name = "games"
+database_id = "5b939166-a476-4e6e-b2f7-fa772cb5e9b0"
+preview_database_id = "DB"
 
 # [ai]
 # binding = "AI"
