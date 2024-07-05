@@ -1,6 +1,46 @@
-h1 {
-  font-family: Arial, Helvetica, sans-serif;
+body {
+  background-color: #181818;
+  color: white;
+  font-family: 'Helvetica', sans-serif;
+  padding-left: var(--size-1);
 }
-table {
-  border: solid black;
+body > * {
+}
+img {
+  height: var(--scale-2);
+  margin-right: var(--size-2);
+  align-self: center;
+}
+li {
+  list-style-type: none;
+  display: flex;
+  margin-bottom: var(--size-2);
+}
+#savedGamesContainer {
+  font-size: var(--scale-2);
+  padding: 0;
+  margin: 0;
+}
+#deleteButton {
+  display: none;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  padding-bottom: var(--size-3);
+  background-color: #211c0a;
+  margin-left: calc(var(--size-1) * -2);
+  width: 100%;
+}
+#openLinksButton {
+  background: none;
+  border: none;
+  color: var(--color-yellow-500);
+  font-size: var(--scale-5);
+  text-decoration: underline;
+}
+a {
+  color: white;
+  text-decoration: none;
 }
