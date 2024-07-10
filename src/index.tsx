@@ -82,6 +82,9 @@ app.post('/search', async (c) => {
     )
       .bind(key.search + '%')
       .raw({ columnNames: true })
+    console.log("Debug data:")
+    console.log(_columns)
+    console.log(rows)
     let htmlReturn =
       '<tr><th>Name</th><th>Link</th><th>Category</th><th>Link</th></tr>'
     rows.map((game) => {
