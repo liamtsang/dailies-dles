@@ -5,7 +5,7 @@ export const renderer = jsxRenderer(({ children, title }) => {
     <html>
       <head>
         <link href='/static/style.css' rel='stylesheet' />
-        <link rel='stylesheet' href='https://unpkg.com/pollen-css' />
+        <link rel="stylesheet" href="https://unpkg.com/pollen-css@4.0.0/pollen.css" />
         <script defer src='/static/client.js'></script>
         <script src='https://unpkg.com/htmx.org@1.9.12'></script>
         <script

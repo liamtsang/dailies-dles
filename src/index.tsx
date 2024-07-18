@@ -16,6 +16,8 @@ app.get('/', (c) => {
   return c.render(
     <>
       <main>
+
+      <section>
         <div x-data="{ handle: (item, position) => {console.log(item + ' ' + position)}}">
           <ul
             id='savedGamesContainer'
@@ -37,39 +39,41 @@ app.get('/', (c) => {
         }}"
           ></ul>
         </div>
-      </main>
-      <form>
-        <input id='userLinkInput' placeholder='link'></input>
-        <input id='userTitleInput' placeholder='Title'></input>
-        <button id='userLinkButton' type='button' onclick='addLink()'>
-          Submit
-        </button>
-      </form>
-      <form>
-        <button id='clearButton' type='button' onclick='clearAll()'>
-          Clear
-        </button>
-      </form>
-
-      <form>
-        <input
-          type='search'
-          name='search'
-          placeholder='Search'
-          hx-post='/search'
-          hx-trigger='input changed delay:100ms, search'
-          hx-target='#search-results'
-        ></input>
-        <input style='display: none'></input>
-      </form>
-      <table id='search-results'></table>
-      <footer>
         <form>
           <button id='openLinksButton' type='button' onclick='openLinks()'>
-            ▶ Open Links
+           Open Links <img src="/static/icon.svg"></img>
           </button>
         </form>
-      </footer>
+      </section>
+
+      <section>
+        <form>
+          <input id='userLinkInput' placeholder='link'></input>
+          <input id='userTitleInput' placeholder='Title'></input>
+          <button id='userLinkButton' type='button' onclick='addLink()'>
+            Submit
+          </button>
+        </form>
+        <form>
+          <button id='clearButton' type='button' onclick='clearAll()'>
+            Clear
+          </button>
+        </form>
+        <form>
+          <input
+            type='search'
+            name='search'
+            placeholder='Search'
+            hx-post='/search'
+            hx-trigger='input changed delay:100ms, search'
+            hx-target='#search-results'
+          ></input>
+          <input style='display: none'></input>
+        </form>
+        <table id='search-results'></table>
+      </section>
+
+      </main>
     </>
   )
 })
@@ -86,14 +90,13 @@ app.post('/search', async (c) => {
     console.log(_columns)
     console.log(rows)
     let htmlReturn =
-      '<tr><th>Name</th><th>Link</th><th>Category</th><th>Link</th></tr>'
+      '<tr><th></th><th>Name</th><th>Category</th><th>Save</th></tr>'
     rows.map((game) => {
       // 0 Title 1 Link 2 Category 3 Icon
       let htmlRow = html`
         <tr>
           <td><img src="${game[3]}" style="height: 1rem"></img></td>
-          <td>${game[0]}</td>
-          <td><a href='${game[1]}'>Link</a></td>
+          <td><a href='${game[1]}'>${game[0]}</a></td>
           <td>${game[2]}</td>
           <td><button onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">Save Game</button></td>
         </tr>

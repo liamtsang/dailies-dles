@@ -6,6 +6,10 @@ body {
 }
 body > * {
 }
+main {
+  display: flex;
+  
+}
 img {
   height: var(--scale-2);
   margin-right: var(--size-2);
@@ -24,6 +28,9 @@ li {
 #deleteButton {
   display: none;
 }
+th {
+  text-align:left;
+}
 
 footer {
   position: fixed;
@@ -34,11 +41,19 @@ footer {
   width: 100%;
 }
 #openLinksButton {
-  background: none;
+  background: #bdd930;
+  padding-left: var(--size-3);
   border: none;
-  color: var(--color-yellow-500);
-  font-size: var(--scale-5);
-  text-decoration: underline;
+  border-radius: 25px;
+  color: black;
+  font-size: var(--scale-2);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+#openLinksButton img {
+  height: calc(var(--scale-2));
+  margin-left: var(--size-2)
 }
 a {
   color: white;
