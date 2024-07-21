@@ -30,6 +30,7 @@ function buildLinkHTML(link, title, image) {
 
   imageElement.src = image
   linkElement.href = link
+  linkElement.target = '_blank'
   linkElement.textContent = title
   deleteElement.onclick = function () {
     removeLink(liElement, link)

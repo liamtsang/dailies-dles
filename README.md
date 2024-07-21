@@ -9,15 +9,16 @@ npm run deploy
 
 Todo:
 Adding list of games
-  [] Database of games
-  [] Search feature
-  [] Add searches to list
+  [x] Database of games
+  [x] Search feature
+  [x] Add searches to list
 Add feature
   Search
-    [] Autocomplete for recognized games
+    [?] Autocomplete for recognized games
   Custom
     [] Url regex check
 Design
+  [] Move custom add and clear all to a settings button
 
 
 dailies.fun

@@ -59,8 +59,9 @@ app.get('/', (c) => {
             Clear
           </button>
         </form>
-        <form>
+        <form id='search-form'>
           <input
+            id='search-input'
             type='search'
             name='search'
             placeholder='Search'
@@ -68,6 +69,7 @@ app.get('/', (c) => {
             hx-trigger='input changed delay:100ms, search'
             hx-target='#search-results'
           ></input>
+          <span id="search-emoji">🔍</span>
           <input style='display: none'></input>
         </form>
         <table id='search-results'></table>
@@ -96,9 +98,9 @@ app.post('/search', async (c) => {
       let htmlRow = html`
         <tr>
           <td><img src="${game[3]}" style="height: 1rem"></img></td>
-          <td><a href='${game[1]}'>${game[0]}</a></td>
+          <td><a href='${game[1]}' target='_blank'>${game[0]}</a></td>
           <td>${game[2]}</td>
-          <td><button onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">Save Game</button></td>
+          <td><button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">Save</button></td>
         </tr>
       `
       htmlReturn += htmlRow

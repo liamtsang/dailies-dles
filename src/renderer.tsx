@@ -20,6 +20,9 @@ export const renderer = jsxRenderer(({ children, title }) => {
           defer
           src='https://cdn.jsdelivr.net/npm/alpinejs@3.13.8/dist/cdn.min.js'
         ></script>
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+        </style>
         <title>{title}</title>
       </head>
       <body>{children}</body>
