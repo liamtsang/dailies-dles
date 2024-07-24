@@ -16,13 +16,12 @@ app.get('/', (c) => {
   return c.render(
     <>
       <main>
-
-      <section>
-        <div x-data="{ handle: (item, position) => {console.log(item + ' ' + position)}}">
-          <ul
-            id='savedGamesContainer'
-            x-sort='handle'
-            x-sort:config="{
+        <section>
+          <div x-data="{ handle: (item, position) => {console.log(item + ' ' + position)}}">
+            <ul
+              id='savedGamesContainer'
+              x-sort='handle'
+              x-sort:config="{
         group: 'localStorage-example',
         store: {
           get: function (sortable) {
@@ -37,44 +36,44 @@ app.get('/', (c) => {
             console.log('DOM items got from x-sort')
           }
         }}"
-          ></ul>
-        </div>
-        <form>
-          <button id='openLinksButton' type='button' onclick='openLinks()'>
-           Open Links <img src="/static/icon.svg"></img>
-          </button>
-        </form>
-      </section>
+            ></ul>
+          </div>
+          <form>
+            <button id='openLinksButton' type='button' onclick='openLinks()'>
+              Open Links <img src='/static/icon.svg'></img>
+            </button>
+          </form>
+        </section>
 
-      <section>
-        <form>
-          <input id='userLinkInput' placeholder='link'></input>
-          <input id='userTitleInput' placeholder='Title'></input>
-          <button id='userLinkButton' type='button' onclick='addLink()'>
-            Submit
-          </button>
-        </form>
-        <form>
-          <button id='clearButton' type='button' onclick='clearAll()'>
-            Clear
-          </button>
-        </form>
-        <form id='search-form'>
-          <input
-            id='search-input'
-            type='search'
-            name='search'
-            placeholder='Search'
-            hx-post='/search'
-            hx-trigger='input changed delay:100ms, search'
-            hx-target='#search-results'
-          ></input>
-          <span id="search-emoji">🔍</span>
-          <input style='display: none'></input>
-        </form>
-        <table id='search-results'></table>
-      </section>
-
+        <section>
+          <form id='search-form'>
+            <input
+              id='search-input'
+              type='search'
+              name='search'
+              placeholder='Search'
+              hx-post='/search'
+              hx-trigger='input changed delay:100ms, search, load'
+              hx-target='#search-results'
+            ></input>
+            <span id='search-emoji'>🔍</span>
+            <input style='display: none'></input>
+          </form>
+          <table id='search-results'></table>
+          <form id='custom-input-form'>
+            <h4>Custom:</h4>
+            <input id='userLinkInput' placeholder='link'></input>
+            <input id='userTitleInput' placeholder='Title'></input>
+            <button id='userLinkButton' type='button' onclick='addLink()'>
+              Submit
+            </button>
+          </form>
+          <form>
+            <button id='clearButton' type='button' onclick='clearAll()'>
+              Clear
+            </button>
+          </form>
+        </section>
       </main>
     </>
   )
@@ -84,11 +83,11 @@ app.post('/search', async (c) => {
   const key = await c.req.parseBody()
   try {
     const [_columns, ...rows] = await c.env.DB.prepare(
-      'SELECT * FROM games WHERE name LIKE ?1 LIMIT 10'
+      'SELECT * FROM games WHERE name LIKE ?1'
     )
       .bind(key.search + '%')
       .raw({ columnNames: true })
-    console.log("Debug data:")
+    console.log('Debug data:')
     console.log(_columns)
     console.log(rows)
     let htmlReturn =

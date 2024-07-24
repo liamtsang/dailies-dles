@@ -17,6 +17,7 @@ Add feature
     [?] Autocomplete for recognized games
   Custom
     [] Url regex check
+    [] Add custom icon (default custom icon not input)
 Design
   [] Move custom add and clear all to a settings button
 
