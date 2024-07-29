@@ -16,7 +16,7 @@ app.get('/', (c) => {
   return c.render(
     <>
       <main>
-        <section>
+        <section id='saved-links-section'>
           <div x-data="{ handle: (item, position) => {console.log(item + ' ' + position)}}">
             <ul
               id='savedGamesContainer'
@@ -46,37 +46,42 @@ app.get('/', (c) => {
         </section>
 
         <section>
-          <form id='search-form'>
-            <input
-              id='search-input'
-              type='search'
-              name='search'
-              placeholder='Search'
-              hx-post='/search'
-              hx-trigger='input changed delay:100ms, search, load'
-              hx-target='#search-results'
-            ></input>
-            <span id='search-emoji'>🔍</span>
-            <input style='display: none'></input>
-          </form>
-          <table id='search-results'></table>
-          <form id='custom-input-form'>
-            <h4>Custom:</h4>
-            <input id='userLinkInput' placeholder='link'></input>
-            <input id='userTitleInput' placeholder='Title'></input>
-            <button id='userLinkButton' type='button' onclick='addLink()'>
-              Submit
-            </button>
-          </form>
-          <form>
-            <button id='clearButton' type='button' onclick='clearAll()'>
-              Clear
-            </button>
-          </form>
+          <div
+            class='category-gallery'
+            hx-get='/category/Word'
+            hx-trigger='load'
+          ></div>
         </section>
       </main>
     </>
   )
+})
+
+app.get('/category/:cat', async (c) => {
+  const category = c.req.param('cat')
+  try {
+    const [_columns, ...rows] = await c.env.DB.prepare(
+      'SELECT * FROM games WHERE category LIKE ?1'
+    )
+      .bind(category + '%')
+      .raw()
+    let htmlReturn = ''
+    rows.map((game) => {
+      // 0 Title 1 Link 2 Category 3 Icon
+      let htmlRow = html`
+        <div class="category-game-item">
+          <img src="${game[3]}"></img>
+          <a href='${game[1]}' target='_blank'>${game[0]}</a>
+          <button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">+</button>
+        </div>
+      `
+      htmlReturn += htmlRow
+    })
+    return c.html(htmlReturn)
+  } catch (error) {
+    console.log('test' + error)
+    return c.text('Error' + error)
+  }
 })
 
 app.post('/search', async (c) => {
@@ -95,12 +100,12 @@ app.post('/search', async (c) => {
     rows.map((game) => {
       // 0 Title 1 Link 2 Category 3 Icon
       let htmlRow = html`
-        <tr>
-          <td><img src="${game[3]}" style="height: 1rem"></img></td>
-          <td><a href='${game[1]}' target='_blank'>${game[0]}</a></td>
-          <td>${game[2]}</td>
-          <td><button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">Save</button></td>
-        </tr>
+        <div class="category-game-item">
+          <img src="${game[3]}" style="height: 1rem"></img>
+          <a href='${game[1]}' target='_blank'>${game[0]}</a>
+          <h4>${game[2]}</h4>
+          <button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">Save</button>
+        </div>
       `
       htmlReturn += htmlRow
     })

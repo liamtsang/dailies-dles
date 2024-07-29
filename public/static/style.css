@@ -1,7 +1,7 @@
 body {
   background-color: #181818;
   color: white;
-  font-family: 'Work Sans', 'Helvetica', sans-serif;
+  font-family: 'General Sans', 'Helvetica', sans-serif;
   font-weight: 400;
   margin: 0;
 }
@@ -10,10 +10,8 @@ body > * {
 main {
   display: flex;
 }
-li img {
-  height: var(--scale-2);
+#saved-links-section {
   margin-right: var(--size-4);
-  align-self: center;
 }
 #savedGamesContainer {
   font-size: var(--scale-4);
@@ -28,6 +26,11 @@ li {
   padding-top: var(--size-1);
   letter-spacing: -1px;
 }
+li img {
+  height: var(--scale-2);
+  margin-right: var(--size-4);
+  align-self: center;
+}
 li:hover {
   background: rgb(54, 54, 54);
 }
@@ -39,11 +42,45 @@ li:hover #deleteButton {
   opacity: 0;
 }
 
+/* Category Gallery */
+.category-gallery {
+  display: flex;
+  align-content: center;
+}
+.category-game-item {
+  font-size: var(--scale-3);
+  display: flex;
+  align-content: center;
+  border-radius: var(--radius-lg);
+  border: 1px solid white;
+  padding: var(--size-1);
+  padding-right: var(--size-3);
+  margin-right: var(--size-3);
+  white-space: nowrap;
+  overflow: hidden;
+  max-height: var(--size-7);
+}
+.category-game-item img {
+  height: var(--size-7);
+  padding-left: var(--size-1);
+  padding-right: var(--size-2);
+}
+.category-game-item a {
+  line-height: var(--size-7);
+}
+.category-game-item button {
+  display: none;
+}
+.category-game-item:hover button {
+  display: flex;
+}
+
 /* Search */
 #search-input {
   background: none;
   color: white;
   font-size: var(--scale-3);
+  width: 100%;
 }
 #search-form {
 }
@@ -57,13 +94,8 @@ li:hover #deleteButton {
   border: none;
   border-radius: 2px;
 }
-
-#custom-input-form h4 {
-  margin: 0;
-}
-#custom-input-form input {
-  color: white;
-  background: none;
+#search-results {
+  width: 100%;
 }
 th {
   text-align: left;
@@ -73,6 +105,17 @@ td {
 }
 td img {
   padding-right: var(--size-3);
+}
+#custom-input-form h4 {
+  margin: 0;
+  margin-bottom: var(--size-1);
+}
+#custom-input-form input {
+  color: white;
+  background: none;
+}
+#clearButton {
+  margin-top: var(--size-2);
 }
 
 footer {
