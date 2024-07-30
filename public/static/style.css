@@ -9,6 +9,7 @@ body > * {
 }
 main {
   display: flex;
+  justify-content: space-between;
 }
 #saved-links-section {
   margin-right: var(--size-4);
@@ -43,19 +44,40 @@ li:hover #deleteButton {
 }
 
 /* Category Gallery */
+#category-section {
+  max-width: 60%;
+}
+#category-section h1 {
+  font-weight: 500;
+  text-align: right;
+  font-size: var(--scale-5);
+  margin: 0;
+  padding: 0;
+  margin-right: var(--size-3);
+  margin-top: var(--size-1);
+  margin-bottom: var(--size-2);
+}
 .category-gallery {
   display: flex;
+  flex-wrap: wrap;
   align-content: center;
+  justify-content: flex-end;
 }
 .category-game-item {
   font-size: var(--scale-3);
+  font-weight: 300;
+
   display: flex;
   align-content: center;
+
   border-radius: var(--radius-lg);
   border: 1px solid white;
+
   padding: var(--size-1);
   padding-right: var(--size-3);
   margin-right: var(--size-3);
+  margin-bottom: var(--size-2);
+
   white-space: nowrap;
   overflow: hidden;
   max-height: var(--size-7);
@@ -140,6 +162,8 @@ footer {
   cursor: pointer;
   display: flex;
   justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
 }
 #openLinksButton img {
   align-self: center;

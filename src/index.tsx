@@ -45,12 +45,63 @@ app.get('/', (c) => {
           </form>
         </section>
 
-        <section>
-          <div
-            class='category-gallery'
-            hx-get='/category/Word'
-            hx-trigger='load'
-          ></div>
+        <section id='category-section'>
+          <div class='category-div'>
+            <h1>Word Games</h1>
+            <div
+              class='category-gallery'
+              hx-get='/category/Word'
+              hx-trigger='load'
+            ></div>
+          </div>
+          <div class='category-div'>
+            <h1>Trivia Games</h1>
+            <div
+              class='category-gallery'
+              hx-get='/category/Trivia'
+              hx-trigger='load'
+            ></div>
+          </div>
+          <div class='category-div'>
+            <h1>Geography Games</h1>
+            <div
+              class='category-gallery'
+              hx-get='/category/Geography'
+              hx-trigger='load'
+            ></div>
+          </div>
+          <div class='category-div'>
+            <h1>Music Games</h1>
+            <div
+              class='category-gallery'
+              hx-get='/category/Music'
+              hx-trigger='load'
+            ></div>
+          </div>
+          <div class='category-div'>
+            <h1>Movie Games</h1>
+            <div
+              class='category-gallery'
+              hx-get='/category/Movies'
+              hx-trigger='load'
+            ></div>
+          </div>
+          <div class='category-div'>
+            <h1>Video Games</h1>
+            <div
+              class='category-gallery'
+              hx-get='/category/Video Games'
+              hx-trigger='load'
+            ></div>
+          </div>
+          <div class='category-div'>
+            <h1>Other</h1>
+            <div
+              class='category-gallery'
+              hx-get='/category-other'
+              hx-trigger='load'
+            ></div>
+          </div>
         </section>
       </main>
     </>
@@ -65,6 +116,30 @@ app.get('/category/:cat', async (c) => {
     )
       .bind(category + '%')
       .raw()
+    let htmlReturn = ''
+    rows.map((game) => {
+      // 0 Title 1 Link 2 Category 3 Icon
+      let htmlRow = html`
+        <div class="category-game-item">
+          <img src="${game[3]}"></img>
+          <a href='${game[1]}' target='_blank'>${game[0]}</a>
+          <button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">+</button>
+        </div>
+      `
+      htmlReturn += htmlRow
+    })
+    return c.html(htmlReturn)
+  } catch (error) {
+    console.log('test' + error)
+    return c.text('Error' + error)
+  }
+})
+
+app.get('/category-other', async (c) => {
+  try {
+    const [_columns, ...rows] = await c.env.DB.prepare(
+      "SELECT * FROM games WHERE category NOT LIKE '%Geography%' AND category NOT LIKE '%Movies%' AND category NOT LIKE '%Music%' AND category NOT LIKE '%Trivia%'  AND category NOT LIKE '%Video Games%' AND category NOT LIKE '%Word%'"
+    ).raw()
     let htmlReturn = ''
     rows.map((game) => {
       // 0 Title 1 Link 2 Category 3 Icon
