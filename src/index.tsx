@@ -40,7 +40,7 @@ app.get('/', (c) => {
           </div>
           <form>
             <button id='openLinksButton' type='button' onclick='openLinks()'>
-              Open Links <img src='/static/icon.svg'></img>
+              Open Links
             </button>
           </form>
         </section>

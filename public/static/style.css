@@ -1,8 +1,12 @@
+:root {
+  --text-color: #1c1c1c;
+  --background-color: #fbfbfb;
+}
 body {
-  background-color: #181818;
-  color: white;
+  background-color: var(--background-color);
+  color: var(--text-color);
   font-family: 'General Sans', 'Helvetica', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   margin: 0;
 }
 body > * {
@@ -49,21 +53,40 @@ li:hover #deleteButton {
   opacity: 0;
 }
 #openLinksButton {
+  font-family: 'General Sans', 'Helvetica', sans-serif;
   margin-top: var(--size-2);
   margin-left: var(--size-2);
-  background: #bdd930;
   padding-bottom: var(--size-1);
   padding-left: var(--size-4);
+  padding-right: var(--size-4);
   border: none;
-  border-radius: 500px;
-  color: black;
   font-size: var(--scale-6);
-  letter-spacing: -1px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   white-space: nowrap;
   overflow: hidden;
+  color: var(--background-color);
+
+  background: linear-gradient(
+    180deg,
+    #fecbff 0%,
+    rgba(161, 37, 99, 0.977717) 12.5%,
+    rgba(253, 110, 144, 0.902299) 45%,
+    #fc77ff 100%
+  );
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(161, 37, 99, 0.1),
+    0px 0px 0px 1px rgba(161, 37, 99, 0.1),
+    inset 0px 1px 0px #a12563,
+    inset 0px 0px 0px 1px rgba(161, 37, 99, 0.5);
+  border-radius: 10px;
 }
 #openLinksButton img {
   align-self: center;
@@ -93,8 +116,9 @@ li:hover #deleteButton {
   justify-content: flex-end;
 }
 .category-game-item {
-  font-size: var(--scale-3);
-  font-weight: 300;
+  font-size: var(--scale-5);
+  font-weight: 400;
+  letter-spacing: -0.5px;
 
   display: flex;
   align-content: center;
@@ -102,26 +126,39 @@ li:hover #deleteButton {
   border-radius: var(--radius-lg);
   border: 1px solid white;
 
-  padding: var(--size-1);
+  padding: var(--size-2);
+  padding-left: var(--size-1);
   padding-right: var(--size-3);
   margin-right: var(--size-3);
   margin-bottom: var(--size-2);
 
   white-space: nowrap;
   overflow: hidden;
-  max-height: var(--size-7);
 
   opacity: 0;
   animation: fade-in 500ms forwards;
   animation-delay: calc(0.05s * var(--i));
+
+  background: linear-gradient(180deg, #f7f7f7 0%, #ededed 91.18%);
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(32, 32, 32, 0.1),
+    0px 0px 0px 1px rgba(32, 32, 32, 0.25),
+    inset 0px 1px 0px #ffffff,
+    inset 0px 0px 0px 1px rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
 }
 .category-game-item img {
-  height: var(--size-7);
+  height: var(--size-9);
   padding-left: var(--size-1);
   padding-right: var(--size-2);
+  mix-blend-mode: multiply;
 }
 .category-game-item a {
-  line-height: var(--size-7);
+  line-height: var(--size-9);
 }
 .category-game-item button {
   display: none;
@@ -133,7 +170,6 @@ li:hover #deleteButton {
 /* Search */
 #search-input {
   background: none;
-  color: white;
   font-size: var(--scale-3);
   width: 100%;
 }
@@ -166,7 +202,6 @@ td img {
   margin-bottom: var(--size-1);
 }
 #custom-input-form input {
-  color: white;
   background: none;
 }
 #clearButton {
@@ -182,8 +217,8 @@ footer {
   width: 100%;
 }
 a {
-  color: white;
   text-decoration: none;
+  color: var(--text-color);
 }
 
 @keyframes fade-in {
