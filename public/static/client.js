@@ -15,14 +15,16 @@ function init() {
     console.log('User deleted all links')
     console.log(savedLinks)
   } else {
+    let i = 0
     savedLinks.links.forEach((game) => {
-      buildLinkHTML(game.link, game.title, game.image)
+      i++
+      buildLinkHTML(game.link, game.title, game.image, i)
     })
   }
 }
 
 // Helpers
-function buildLinkHTML(link, title, image) {
+function buildLinkHTML(link, title, image, i) {
   let linkElement = document.createElement('a')
   let deleteElement = document.createElement('button')
   let liElement = document.createElement('li')
@@ -32,6 +34,7 @@ function buildLinkHTML(link, title, image) {
   linkElement.href = link
   linkElement.target = '_blank'
   linkElement.textContent = title
+  liElement.style = '--i: ' + i
   deleteElement.onclick = function () {
     removeLink(liElement, link)
   }

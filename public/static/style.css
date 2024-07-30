@@ -11,24 +11,30 @@ main {
   display: flex;
   justify-content: space-between;
 }
+
+/* Saved Games Section  */
 #saved-links-section {
   margin-right: var(--size-4);
 }
 #savedGamesContainer {
-  font-size: var(--scale-4);
+  font-size: var(--scale-6);
   padding: 0;
   margin: 0;
 }
-li {
+#savedGamesContainer li {
   list-style-type: none;
   display: flex;
   padding-left: var(--size-3);
   padding-bottom: var(--size-1);
   padding-top: var(--size-1);
   letter-spacing: -1px;
+
+  opacity: 0;
+  animation: fade-in 500ms forwards;
+  animation-delay: calc(0.05s * var(--i));
 }
 li img {
-  height: var(--scale-2);
+  height: var(--scale-5);
   margin-right: var(--size-4);
   align-self: center;
 }
@@ -42,6 +48,29 @@ li:hover #deleteButton {
   margin-left: auto;
   opacity: 0;
 }
+#openLinksButton {
+  margin-top: var(--size-2);
+  margin-left: var(--size-2);
+  background: #bdd930;
+  padding-bottom: var(--size-1);
+  padding-left: var(--size-4);
+  border: none;
+  border-radius: 500px;
+  color: black;
+  font-size: var(--scale-6);
+  letter-spacing: -1px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#openLinksButton img {
+  align-self: center;
+  height: calc(var(--scale-6));
+  margin-left: var(--size-3);
+  margin-right: var(--size-3);
+}
 
 /* Category Gallery */
 #category-section {
@@ -50,7 +79,7 @@ li:hover #deleteButton {
 #category-section h1 {
   font-weight: 500;
   text-align: right;
-  font-size: var(--scale-5);
+  font-size: var(--scale-4);
   margin: 0;
   padding: 0;
   margin-right: var(--size-3);
@@ -81,6 +110,10 @@ li:hover #deleteButton {
   white-space: nowrap;
   overflow: hidden;
   max-height: var(--size-7);
+
+  opacity: 0;
+  animation: fade-in 500ms forwards;
+  animation-delay: calc(0.05s * var(--i));
 }
 .category-game-item img {
   height: var(--size-7);
@@ -148,30 +181,13 @@ footer {
   margin-left: calc(var(--size-1) * -2);
   width: 100%;
 }
-#openLinksButton {
-  margin-top: var(--size-2);
-  margin-left: var(--size-2);
-  background: #bdd930;
-  padding-bottom: var(--size-1);
-  padding-left: var(--size-4);
-  border: none;
-  border-radius: 25px;
-  color: black;
-  font-size: var(--scale-4);
-  letter-spacing: -1px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  white-space: nowrap;
-  overflow: hidden;
-}
-#openLinksButton img {
-  align-self: center;
-  height: calc(var(--scale-4));
-  margin-left: var(--size-3);
-  margin-right: var(--size-3);
-}
 a {
   color: white;
   text-decoration: none;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
 }

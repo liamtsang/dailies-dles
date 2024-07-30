@@ -111,16 +111,19 @@ app.get('/', (c) => {
 app.get('/category/:cat', async (c) => {
   const category = c.req.param('cat')
   try {
-    const [_columns, ...rows] = await c.env.DB.prepare(
-      'SELECT * FROM games WHERE category LIKE ?1'
+    const [...rows] = await c.env.DB.prepare(
+      'SELECT * FROM games WHERE LOWER(category) LIKE LOWER(?1)'
     )
-      .bind(category + '%')
+      .bind(category.trim())
       .raw()
+    console.log(rows)
     let htmlReturn = ''
+    let i = 0
     rows.map((game) => {
+      i++
       // 0 Title 1 Link 2 Category 3 Icon
       let htmlRow = html`
-        <div class="category-game-item">
+        <div class="category-game-item" style='--i: ${i}'>
           <img src="${game[3]}"></img>
           <a href='${game[1]}' target='_blank'>${game[0]}</a>
           <button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">+</button>
