@@ -6,29 +6,32 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   font-family: 'General Sans', 'Helvetica', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   margin: 0;
 }
 body > * {
 }
 main {
-  display: flex;
-  justify-content: space-between;
+  background-color: var(--background-color);
+  margin: 0 auto;
+  max-width: 1280px;
+}
+section {
+  margin: auto;
+  width: 75%;
 }
 
 /* Saved Games Section  */
 #saved-links-section {
-  margin-right: var(--size-4);
 }
 #savedGamesContainer {
-  font-size: var(--scale-6);
+  font-size: var(--scale-5);
   padding: 0;
   margin: 0;
 }
 #savedGamesContainer li {
   list-style-type: none;
   display: flex;
-  padding-left: var(--size-3);
   padding-bottom: var(--size-1);
   padding-top: var(--size-1);
   letter-spacing: -1px;
@@ -55,10 +58,9 @@ li:hover #deleteButton {
 #openLinksButton {
   font-family: 'General Sans', 'Helvetica', sans-serif;
   margin-top: var(--size-2);
-  margin-left: var(--size-2);
   padding-bottom: var(--size-1);
-  padding-left: var(--size-4);
-  padding-right: var(--size-4);
+  padding-left: var(--size-6);
+  padding-right: var(--size-6);
   border: none;
   font-size: var(--scale-6);
   font-weight: 400;
@@ -68,25 +70,21 @@ li:hover #deleteButton {
   justify-content: center;
   white-space: nowrap;
   overflow: hidden;
-  color: var(--background-color);
+  color: var(--text-color);
 
-  background: linear-gradient(
-    180deg,
-    #fecbff 0%,
-    rgba(161, 37, 99, 0.977717) 12.5%,
-    rgba(253, 110, 144, 0.902299) 45%,
-    #fc77ff 100%
-  );
+  /* Rectangle 24 */
+
+  background: linear-gradient(174.03deg, #bdd930 4.65%, #aec925 88.61%);
   box-shadow:
     0px 1px 2px rgba(0, 0, 0, 0.1),
     0px 4px 4px rgba(0, 0, 0, 0.08),
     0px 10px 6px rgba(0, 0, 0, 0.05),
     0px 17px 7px rgba(0, 0, 0, 0.01),
-    0px 1px 0px rgba(161, 37, 99, 0.1),
-    0px 0px 0px 1px rgba(161, 37, 99, 0.1),
-    inset 0px 1px 0px #a12563,
-    inset 0px 0px 0px 1px rgba(161, 37, 99, 0.5);
-  border-radius: 10px;
+    0px 1px 0px rgba(189, 217, 48, 0.1),
+    0px 0px 0px 1px rgba(189, 217, 48, 0.25),
+    inset 0px 1px 0px #8ca220,
+    inset 0px 0px 0px 1px rgba(140, 162, 32, 0.5);
+  border-radius: 44px;
 }
 #openLinksButton img {
   align-self: center;
@@ -97,12 +95,11 @@ li:hover #deleteButton {
 
 /* Category Gallery */
 #category-section {
-  max-width: 60%;
+  margin-top: var(--size-8);
 }
 #category-section h1 {
   font-weight: 500;
-  text-align: right;
-  font-size: var(--scale-4);
+  font-size: var(--scale-5);
   margin: 0;
   padding: 0;
   margin-right: var(--size-3);
@@ -113,7 +110,6 @@ li:hover #deleteButton {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  justify-content: flex-end;
 }
 .category-game-item {
   font-size: var(--scale-5);
@@ -124,7 +120,6 @@ li:hover #deleteButton {
   align-content: center;
 
   border-radius: var(--radius-lg);
-  border: 1px solid white;
 
   padding: var(--size-2);
   padding-left: var(--size-1);
@@ -139,7 +134,7 @@ li:hover #deleteButton {
   animation: fade-in 500ms forwards;
   animation-delay: calc(0.05s * var(--i));
 
-  background: linear-gradient(180deg, #f7f7f7 0%, #ededed 91.18%);
+  background: linear-gradient(180deg, #f7f7f7 0%, #ededed 91.18%) !important;
   box-shadow:
     0px 1px 2px rgba(0, 0, 0, 0.1),
     0px 4px 4px rgba(0, 0, 0, 0.08),
@@ -225,4 +220,77 @@ a {
   to {
     opacity: 1;
   }
+}
+
+.green-category-button {
+  background: linear-gradient(174.03deg, #bdd930 4.65%, #aec925 88.61%);
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(189, 217, 48, 0.1),
+    0px 0px 0px 1px rgba(189, 217, 48, 0.25),
+    inset 0px 1px 0px #aec925,
+    inset 0px 0px 0px 1px rgba(174, 201, 37, 0.5);
+}
+.red-category-button {
+  background: linear-gradient(180deg, #f58181 0%, #e24141 100%);
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(245, 129, 129, 0.1),
+    0px 0px 0px 1px rgba(245, 129, 129, 0.25),
+    inset 0px 1px 0px #e24141,
+    inset 0px 0px 0px 1px rgba(226, 65, 65, 0.5);
+}
+.yellow-category-button {
+  background: linear-gradient(180deg, #ffdb4a 0%, #ffd11a 100%);
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(255, 219, 74, 0.1),
+    0px 0px 0px 1px rgba(255, 219, 74, 0.25),
+    inset 0px 1px 0px #ffd11a,
+    inset 0px 0px 0px 1px rgba(255, 209, 26, 0.5);
+}
+.blue-category-button {
+  background: linear-gradient(180deg, #b9ecf5 0%, #7ce2f4 100%);
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(185, 236, 245, 0.1),
+    0px 0px 0px 1px rgba(185, 236, 245, 0.25),
+    inset 0px 1px 0px #7ce2f4,
+    inset 0px 0px 0px 1px rgba(124, 226, 244, 0.5);
+}
+.pink-category-button {
+  background: linear-gradient(180deg, #ffc8f9 0%, #ff97f5 100%);
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(255, 200, 249, 0.1),
+    0px 0px 0px 1px rgba(255, 200, 249, 0.25),
+    inset 0px 1px 0px #ff97f5,
+    inset 0px 0px 0px 1px rgba(255, 151, 245, 0.5);
+}
+.orange-category-button {
+  background: linear-gradient(180deg, #ffb246 0%, #fb970b 100%);
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(255, 178, 70, 0.1),
+    0px 0px 0px 1px rgba(255, 178, 70, 0.25),
+    inset 0px 1px 0px #fb970b,
+    inset 0px 0px 0px 1px rgba(251, 151, 11, 0.5);
 }

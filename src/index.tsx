@@ -40,72 +40,68 @@ app.get('/', (c) => {
           </div>
           <form>
             <button id='openLinksButton' type='button' onclick='openLinks()'>
-              Open Links
+              Open Links 🡥
             </button>
           </form>
         </section>
 
         <section id='category-section'>
-          <div class='category-div'>
-            <h1>Word Games</h1>
-            <div
-              class='category-gallery'
-              hx-get='/category/Word'
-              hx-trigger='load'
-            ></div>
-          </div>
-          <div class='category-div'>
-            <h1>Trivia Games</h1>
-            <div
-              class='category-gallery'
-              hx-get='/category/Trivia'
-              hx-trigger='load'
-            ></div>
-          </div>
-          <div class='category-div'>
-            <h1>Geography Games</h1>
-            <div
-              class='category-gallery'
-              hx-get='/category/Geography'
-              hx-trigger='load'
-            ></div>
-          </div>
-          <div class='category-div'>
-            <h1>Music Games</h1>
-            <div
-              class='category-gallery'
-              hx-get='/category/Music'
-              hx-trigger='load'
-            ></div>
-          </div>
-          <div class='category-div'>
-            <h1>Movie Games</h1>
-            <div
-              class='category-gallery'
-              hx-get='/category/Movies'
-              hx-trigger='load'
-            ></div>
-          </div>
-          <div class='category-div'>
-            <h1>Video Games</h1>
-            <div
-              class='category-gallery'
-              hx-get='/category/Video Games'
-              hx-trigger='load'
-            ></div>
-          </div>
-          <div class='category-div'>
-            <h1>Other</h1>
-            <div
-              class='category-gallery'
-              hx-get='/category-other'
-              hx-trigger='load'
-            ></div>
-          </div>
+          <div
+            class='category-gallery'
+            hx-get='/all-categories'
+            hx-trigger='load'
+          ></div>
         </section>
       </main>
     </>
   )
+})
+
+function category_to_color(category: String) {
+  switch (category) {
+    case 'Word':
+      return 'orange-category-button'
+    case 'Geography':
+      return 'green-category-button'
+    case 'Movies':
+      return 'blue-category-button'
+    case 'Music':
+      return 'red-category-button'
+    case 'Trivia':
+      return 'yellow-category-button'
+    case 'Video Games':
+      return 'pink-category-button'
+    default:
+      return 'white-category-button'
+  }
+}
+
+app.get('/all-categories', async (c) => {
+  try {
+    const [...rows] = await c.env.DB.prepare(
+      'SELECT * FROM games ORDER BY category'
+    ).raw()
+    console.log(rows)
+    let htmlReturn = ''
+    let i = 0
+    rows.map((game) => {
+      // 0 Title 1 Link 2 Category 3 Icon
+      i++
+      const css = category_to_color(game[2] as string)
+      let htmlRow = html`
+        <div class="category-game-item ${css}" style='--i: ${i}'>
+          <img src="${game[3]}"></img>
+          <a href='${game[1]}' target='_blank'>${game[0]}</a>
+          <button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">+</button>
+        </div>
+      `
+      htmlReturn += htmlRow
+    })
+    return c.html(htmlReturn)
+  } catch (error) {
+    console.log('test' + error)
+    return c.text('Error' + error)
+  }
 })
 
 app.get('/category/:cat', async (c) => {
