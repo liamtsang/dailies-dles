@@ -2,12 +2,20 @@
   --text-color: #1c1c1c;
   --background-color: #fbfbfb;
 }
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 body {
   background-color: var(--background-color);
   color: var(--text-color);
   font-family: 'General Sans', 'Helvetica', sans-serif;
   font-weight: 400;
   margin: 0;
+  overflow-y: auto;
+  min-height: 100%;
 }
 body > * {
 }
@@ -15,40 +23,68 @@ main {
   background-color: var(--background-color);
   margin: 0 auto;
   max-width: 1280px;
+  min-height: 100%;
 }
 section {
-  margin: auto;
+  margin: 0 auto;
   width: 75%;
 }
 
 /* Saved Games Section  */
 #saved-links-section {
+  position: relative;
+}
+#saved-links-key {
+  color: rgb(140, 140, 140);
+  font-family: 'Iosevka Extended', monospace;
+  text-align: right;
+  position: absolute;
+  left: calc(var(--size-10) * -3.35);
+  width: calc(var(--size-10) * 3);
+  padding-top: var(--size-3);
+}
+#saved-links-key h4 {
+  font-weight: 300;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: var(--size-1);
+}
+
+#saved-links h4 span {
+  display: none;
+  color: red;
+  font-size: calc(var(--scale-1) * 0.5);
+  margin-left: var(--size-1);
 }
 #savedGamesContainer {
-  font-size: var(--scale-5);
   padding: 0;
   margin: 0;
+  margin-top: var(--size-4);
 }
 #savedGamesContainer li {
   list-style-type: none;
   display: flex;
   padding-bottom: var(--size-1);
   padding-top: var(--size-1);
+
+  font-size: var(--scale-4);
   letter-spacing: -1px;
 
   opacity: 0;
   animation: fade-in 500ms forwards;
   animation-delay: calc(0.05s * var(--i));
 }
-li img {
-  height: var(--scale-5);
-  margin-right: var(--size-4);
+#savedGamesContainer li img {
+  height: var(--scale-4);
+  margin-right: var(--size-2);
   align-self: center;
 }
-li:hover {
+#savedGamesContainer li:hover {
   background: rgb(54, 54, 54);
 }
-li:hover #deleteButton {
+#savedGamesContainer li:hover #deleteButton {
   opacity: 1;
 }
 #deleteButton {
@@ -57,34 +93,37 @@ li:hover #deleteButton {
 }
 #openLinksButton {
   font-family: 'General Sans', 'Helvetica', sans-serif;
-  margin-top: var(--size-2);
+  margin-top: var(--size-3);
   padding-bottom: var(--size-1);
   padding-left: var(--size-6);
   padding-right: var(--size-6);
   border: none;
-  font-size: var(--scale-6);
+  font-size: var(--scale-5);
   font-weight: 400;
   letter-spacing: -0.5px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   white-space: nowrap;
-  overflow: hidden;
-  color: var(--text-color);
+  color: var(--background-color);
 
-  /* Rectangle 24 */
-
-  background: linear-gradient(174.03deg, #bdd930 4.65%, #aec925 88.61%);
+  background: linear-gradient(
+    180deg,
+    #cbcdff 0%,
+    rgba(39, 37, 161, 0.977717) 12.5%,
+    rgba(70, 10, 199, 0.902299) 45%,
+    #777cff 100%
+  );
   box-shadow:
     0px 1px 2px rgba(0, 0, 0, 0.1),
     0px 4px 4px rgba(0, 0, 0, 0.08),
     0px 10px 6px rgba(0, 0, 0, 0.05),
     0px 17px 7px rgba(0, 0, 0, 0.01),
-    0px 1px 0px rgba(189, 217, 48, 0.1),
-    0px 0px 0px 1px rgba(189, 217, 48, 0.25),
-    inset 0px 1px 0px #8ca220,
-    inset 0px 0px 0px 1px rgba(140, 162, 32, 0.5);
-  border-radius: 44px;
+    0px 1px 0px rgba(119, 124, 255, 0.1),
+    0px 0px 0px 1px rgba(119, 124, 255, 0.1),
+    inset 0px 1px 0px #2725a1,
+    inset 0px 0px 0px 1px rgba(39, 37, 161, 0.5);
+  border-radius: 42px;
 }
 #openLinksButton img {
   align-self: center;
@@ -93,10 +132,54 @@ li:hover #deleteButton {
   margin-right: var(--size-3);
 }
 
+hr {
+  border: 1px solid rgb(214, 214, 214);
+  max-width: 1280px;
+  width: 75%;
+  margin: 0 auto;
+  margin-top: var(--size-8);
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01);
+}
+
 /* Category Gallery */
 #category-section {
+  position: relative;
   margin-top: var(--size-8);
 }
+#category-section-key {
+  color: rgb(140, 140, 140);
+  font-family: 'Fira Code', monospace;
+  text-align: right;
+  position: absolute;
+  left: calc(var(--size-10) * -3.35);
+  width: calc(var(--size-10) * 3);
+  padding-top: var(--size-3);
+}
+#category-section-key h4 {
+  font-weight: 300;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: var(--size-1);
+}
+#category-section-key h4:hover span {
+  display: block;
+}
+#category-section-key h4:hover .category-game-item {
+  box-shadow: none;
+}
+#category-section-key h4 span {
+  display: none;
+  color: red;
+  font-size: calc(var(--scale-1) * 0.5);
+  margin-left: var(--size-1);
+}
+
 #category-section h1 {
   font-weight: 500;
   font-size: var(--scale-5);
@@ -125,7 +208,7 @@ li:hover #deleteButton {
   padding-left: var(--size-1);
   padding-right: var(--size-3);
   margin-right: var(--size-3);
-  margin-bottom: var(--size-2);
+  margin-bottom: var(--size-3);
 
   white-space: nowrap;
   overflow: hidden;
@@ -134,7 +217,7 @@ li:hover #deleteButton {
   animation: fade-in 500ms forwards;
   animation-delay: calc(0.05s * var(--i));
 
-  background: linear-gradient(180deg, #f7f7f7 0%, #ededed 91.18%) !important;
+  background: linear-gradient(180deg, #f7f7f7 0%, #ededed 91.18%);
   box-shadow:
     0px 1px 2px rgba(0, 0, 0, 0.1),
     0px 4px 4px rgba(0, 0, 0, 0.08),
@@ -143,14 +226,14 @@ li:hover #deleteButton {
     0px 1px 0px rgba(32, 32, 32, 0.1),
     0px 0px 0px 1px rgba(32, 32, 32, 0.25),
     inset 0px 1px 0px #ffffff,
-    inset 0px 0px 0px 1px rgba(255, 255, 255, 0.5);
+    inset 0px 0px 0px 1px rgba(255, 255, 255, 0.5) !important;
   border-radius: 20px;
 }
 .category-game-item img {
   height: var(--size-9);
   padding-left: var(--size-1);
   padding-right: var(--size-2);
-  mix-blend-mode: multiply;
+  mix-blend-mode: color-burn;
 }
 .category-game-item a {
   line-height: var(--size-9);
@@ -222,75 +305,115 @@ a {
   }
 }
 
-.green-category-button {
-  background: linear-gradient(174.03deg, #bdd930 4.65%, #aec925 88.61%);
-  box-shadow:
-    0px 1px 2px rgba(0, 0, 0, 0.1),
-    0px 4px 4px rgba(0, 0, 0, 0.08),
-    0px 10px 6px rgba(0, 0, 0, 0.05),
-    0px 17px 7px rgba(0, 0, 0, 0.01),
-    0px 1px 0px rgba(189, 217, 48, 0.1),
-    0px 0px 0px 1px rgba(189, 217, 48, 0.25),
-    inset 0px 1px 0px #aec925,
-    inset 0px 0px 0px 1px rgba(174, 201, 37, 0.5);
-}
 .red-category-button {
-  background: linear-gradient(180deg, #f58181 0%, #e24141 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 59, 48, 0.35) 0%,
+    rgba(255, 16, 2, 0.35) 100%
+  );
   box-shadow:
     0px 1px 2px rgba(0, 0, 0, 0.1),
     0px 4px 4px rgba(0, 0, 0, 0.08),
     0px 10px 6px rgba(0, 0, 0, 0.05),
     0px 17px 7px rgba(0, 0, 0, 0.01),
-    0px 1px 0px rgba(245, 129, 129, 0.1),
-    0px 0px 0px 1px rgba(245, 129, 129, 0.25),
-    inset 0px 1px 0px #e24141,
-    inset 0px 0px 0px 1px rgba(226, 65, 65, 0.5);
-}
-.yellow-category-button {
-  background: linear-gradient(180deg, #ffdb4a 0%, #ffd11a 100%);
-  box-shadow:
-    0px 1px 2px rgba(0, 0, 0, 0.1),
-    0px 4px 4px rgba(0, 0, 0, 0.08),
-    0px 10px 6px rgba(0, 0, 0, 0.05),
-    0px 17px 7px rgba(0, 0, 0, 0.01),
-    0px 1px 0px rgba(255, 219, 74, 0.1),
-    0px 0px 0px 1px rgba(255, 219, 74, 0.25),
-    inset 0px 1px 0px #ffd11a,
-    inset 0px 0px 0px 1px rgba(255, 209, 26, 0.5);
-}
-.blue-category-button {
-  background: linear-gradient(180deg, #b9ecf5 0%, #7ce2f4 100%);
-  box-shadow:
-    0px 1px 2px rgba(0, 0, 0, 0.1),
-    0px 4px 4px rgba(0, 0, 0, 0.08),
-    0px 10px 6px rgba(0, 0, 0, 0.05),
-    0px 17px 7px rgba(0, 0, 0, 0.01),
-    0px 1px 0px rgba(185, 236, 245, 0.1),
-    0px 0px 0px 1px rgba(185, 236, 245, 0.25),
-    inset 0px 1px 0px #7ce2f4,
-    inset 0px 0px 0px 1px rgba(124, 226, 244, 0.5);
-}
-.pink-category-button {
-  background: linear-gradient(180deg, #ffc8f9 0%, #ff97f5 100%);
-  box-shadow:
-    0px 1px 2px rgba(0, 0, 0, 0.1),
-    0px 4px 4px rgba(0, 0, 0, 0.08),
-    0px 10px 6px rgba(0, 0, 0, 0.05),
-    0px 17px 7px rgba(0, 0, 0, 0.01),
-    0px 1px 0px rgba(255, 200, 249, 0.1),
-    0px 0px 0px 1px rgba(255, 200, 249, 0.25),
-    inset 0px 1px 0px #ff97f5,
-    inset 0px 0px 0px 1px rgba(255, 151, 245, 0.5);
+    0px 1px 0px rgba(255, 16, 2, 0.1),
+    0px 0px 0px 1px rgba(255, 16, 2, 0.25),
+    inset 0px 1px 0px #ff3b30,
+    inset 0px 0px 0px 1px rgba(255, 59, 48, 0.5);
 }
 .orange-category-button {
-  background: linear-gradient(180deg, #ffb246 0%, #fb970b 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 149, 0, 0.35) 0%,
+    rgba(225, 132, 0, 0.35) 100%
+  );
   box-shadow:
     0px 1px 2px rgba(0, 0, 0, 0.1),
     0px 4px 4px rgba(0, 0, 0, 0.08),
     0px 10px 6px rgba(0, 0, 0, 0.05),
     0px 17px 7px rgba(0, 0, 0, 0.01),
-    0px 1px 0px rgba(255, 178, 70, 0.1),
-    0px 0px 0px 1px rgba(255, 178, 70, 0.25),
-    inset 0px 1px 0px #fb970b,
-    inset 0px 0px 0px 1px rgba(251, 151, 11, 0.5);
+    0px 1px 0px rgba(225, 132, 0, 0.1),
+    0px 0px 0px 1px rgba(225, 132, 0, 0.25),
+    inset 0px 1px 0px #ff9500,
+    inset 0px 0px 0px 1px rgba(255, 149, 0, 0.5);
+}
+.yellow-category-button {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 204, 0, 0.35) 0%,
+    rgba(202, 162, 0, 0.35) 100%
+  );
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(202, 161, 0, 0.1),
+    0px 0px 0px 1px rgba(202, 161, 0, 0.25),
+    inset 0px 1px 0px #ffcc00,
+    inset 0px 0px 0px 1px rgba(255, 204, 0, 0.5);
+}
+.green-category-button {
+  background: linear-gradient(
+    180deg,
+    rgba(52, 199, 89, 0.35) 0%,
+    rgba(41, 146, 67, 0.35) 100%
+  );
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(41, 146, 67, 0.1),
+    0px 0px 0px 1px rgba(41, 146, 67, 0.25),
+    inset 0px 1px 0px #34c759,
+    inset 0px 0px 0px 1px rgba(52, 199, 89, 0.780392);
+}
+.cyan-category-button {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 199, 190, 0.35) 0%,
+    rgba(6, 156, 149, 0.35) 65.5%
+  );
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(6, 156, 149, 0.1),
+    0px 0px 0px 1px rgba(6, 156, 149, 0.25),
+    inset 0px 1px 0px #00c7be,
+    inset 0px 0px 0px 1px rgba(0, 199, 190, 0.5);
+}
+.blue-category-button {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 122, 255, 0.35) 0%,
+    rgba(8, 84, 166, 0.35) 100%
+  );
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(8, 84, 166, 0.1),
+    0px 0px 0px 1px rgba(8, 84, 166, 0.25),
+    inset 0px 1px 0px #007aff,
+    inset 0px 0px 0px 1px rgba(0, 122, 255, 0.5);
+}
+.purple-category-button {
+  background: linear-gradient(
+    180deg,
+    rgba(175, 82, 222, 0.35) 0%,
+    rgba(128, 45, 170, 0.35) 100%
+  );
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.08),
+    0px 10px 6px rgba(0, 0, 0, 0.05),
+    0px 17px 7px rgba(0, 0, 0, 0.01),
+    0px 1px 0px rgba(128, 45, 170, 0.1),
+    0px 0px 0px 1px rgba(128, 45, 170, 0.25),
+    inset 0px 1px 0px #af52de,
+    inset 0px 0px 0px 1px rgba(175, 82, 222, 0.5);
 }

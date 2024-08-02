@@ -17,6 +17,9 @@ app.get('/', (c) => {
     <>
       <main>
         <section id='saved-links-section'>
+          <div id='saved-links-key'>
+            <h4>SAVED</h4>
+          </div>
           <div x-data="{ handle: (item, position) => {console.log(item + ' ' + position)}}">
             <ul
               id='savedGamesContainer'
@@ -40,12 +43,37 @@ app.get('/', (c) => {
           </div>
           <form>
             <button id='openLinksButton' type='button' onclick='openLinks()'>
-              Open Links 🡥
+              Open All
             </button>
           </form>
         </section>
 
+        <hr></hr>
+
         <section id='category-section'>
+          <div id='category-section-key'>
+            <h4>
+              WORDS<span>⬤</span>
+            </h4>
+            <h4>
+              GEOGRAPHY<span>⬤</span>
+            </h4>
+            <h4>
+              TRIVIA<span>⬤</span>
+            </h4>
+            <h4>
+              MOVIES<span>⬤</span>
+            </h4>
+            <h4>
+              MUSIC<span>⬤</span>
+            </h4>
+            <h4>
+              VIDEO GAMES<span>⬤</span>
+            </h4>
+            <h4>
+              OTHER<span>⬤</span>
+            </h4>
+          </div>
           <div
             class='category-gallery'
             hx-get='/all-categories'
@@ -59,20 +87,21 @@ app.get('/', (c) => {
 
 function category_to_color(category: String) {
   switch (category) {
-    case 'Word':
-      return 'orange-category-button'
     case 'Geography':
-      return 'green-category-button'
-    case 'Movies':
-      return 'blue-category-button'
-    case 'Music':
       return 'red-category-button'
-    case 'Trivia':
+    case 'Movies':
+      return 'orange-category-button'
+    case 'Music':
       return 'yellow-category-button'
+
+    case 'Trivia':
+      return 'cyan-category-button'
     case 'Video Games':
-      return 'pink-category-button'
+      return 'blue-category-button'
+    case 'Word':
+      return 'purple-category-button'
     default:
-      return 'white-category-button'
+      return 'green-category-button'
   }
 }
 
