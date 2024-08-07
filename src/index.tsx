@@ -118,7 +118,7 @@ app.get('/all-categories', async (c) => {
       i++
       const css = category_to_color(game[2] as string)
       let htmlRow = html`
-        <div class="category-game-item ${css}" style='--i: ${i}'>
+        <div class="category-game-item draggable ${css}" style='--i: ${i}'>
           <img src="${game[3]}"></img>
           <a href='${game[1]}' target='_blank'>${game[0]}</a>
           <button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">+</button>

@@ -30,6 +30,18 @@ section {
   width: 75%;
 }
 
+.draggable {
+  cursor: move;
+  touch-action: none;
+  user-select: none;
+  z-index: 10;
+  position: relative;
+}
+.draggable.dragging {
+  position: fixed; /* Apply this class when dragging */
+  z-index: 1000; /* Ensure it's on top when dragging */
+}
+
 /* Saved Games Section  */
 #saved-links-section {
   position: relative;
@@ -204,9 +216,6 @@ hr {
 
   border-radius: var(--radius-lg);
 
-  padding: var(--size-2);
-  padding-left: var(--size-1);
-  padding-right: var(--size-3);
   margin-right: var(--size-3);
   margin-bottom: var(--size-3);
 
@@ -230,19 +239,28 @@ hr {
   border-radius: 20px;
 }
 .category-game-item img {
+  margin-top: var(--size-2);
+  margin-bottom: var(--size-2);
+  margin-left: var(--size-1);
   height: var(--size-9);
   padding-left: var(--size-1);
   padding-right: var(--size-2);
   mix-blend-mode: color-burn;
 }
 .category-game-item a {
+  margin-top: var(--size-2);
+  margin-bottom: var(--size-2);
+  margin-right: var(--size-1);
   line-height: var(--size-9);
 }
 .category-game-item button {
-  display: none;
+  border: none;
+  border-radius: 2px;
+  opacity: 0;
+  background-color: white;
 }
 .category-game-item:hover button {
-  display: flex;
+  opacity: 0.5;
 }
 
 /* Search */
@@ -257,11 +275,6 @@ hr {
   position: absolute;
   font-size: var(--scale-3);
   margin-left: calc(var(--scale-5) * -1);
-}
-#save-game-button {
-  background: #bdd930;
-  border: none;
-  border-radius: 2px;
 }
 #search-results {
   width: 100%;

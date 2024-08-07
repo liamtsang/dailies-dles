@@ -13,6 +13,7 @@ export const renderer = jsxRenderer(({ children, title }) => {
           href='https://unpkg.com/pollen-css@4.0.0/pollen.css'
         />
         <script defer src='/static/client.js'></script>
+        <script defer src='/static/draggable.js'></script>
         <script src='https://unpkg.com/htmx.org@1.9.12'></script>
         <script
           defer
