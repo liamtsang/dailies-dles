@@ -119,7 +119,7 @@ app.get('/all-categories', async (c) => {
       const css = category_to_color(game[2] as string)
       let htmlRow = html`
         <div class="category-game-item draggable ${css}" style='--i: ${i}'>
-          <img src="${game[3]}"></img>
+          <img src="http://www.google.com/s2/favicons?domain=${game[1]}&sz=256"></img>
           <a href='${game[1]}' target='_blank'>${game[0]}</a>
           <button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">+</button>
         </div>

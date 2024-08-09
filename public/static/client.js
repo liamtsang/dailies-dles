@@ -18,19 +18,19 @@ function init() {
     let i = 0
     savedLinks.links.forEach((game) => {
       i++
-      buildLinkHTML(game.link, game.title, game.image, i)
+      buildLinkHTML(game.link, game.title, i)
     })
   }
 }
 
 // Helpers
-function buildLinkHTML(link, title, image, i) {
+function buildLinkHTML(link, title, i) {
   let linkElement = document.createElement('a')
   let deleteElement = document.createElement('button')
   let liElement = document.createElement('li')
   let imageElement = document.createElement('img')
 
-  imageElement.src = image
+  imageElement.src = `http://www.google.com/s2/favicons?domain=${link}&sz=256`
   linkElement.href = link
   linkElement.target = '_blank'
   linkElement.textContent = title
@@ -47,10 +47,10 @@ function buildLinkHTML(link, title, image, i) {
   liElement.appendChild(deleteElement)
 }
 
-function addGametoLocalStorage(link, title, image) {
+function addGametoLocalStorage(link, title) {
   let savedLinks = savedLinksConstructor()
   if (savedLinks.links)
-    savedLinks.links.push({ link: link, title: title, image: image })
+    savedLinks.links.push({ link: link, title: title})
   localStorage.setItem('savedLinks', JSON.stringify(savedLinks))
 }
 
@@ -62,9 +62,9 @@ function addLink() {
   addGametoLocalStorage(link)
 }
 
-function addLinkFromSearch(link, title, image) {
-  buildLinkHTML(link, title, image)
-  addGametoLocalStorage(link, title, image)
+function addLinkFromSearch(link, title) {
+  buildLinkHTML(link, title)
+  addGametoLocalStorage(link, title)
 }
 
 function removeLink(element, link) {

@@ -1,4 +1,4 @@
-name = "daily-dles-hono"
+name = "daily-dles"
 pages_build_output_dir = "./dist"
 
 # [vars]
@@ -15,7 +15,7 @@ pages_build_output_dir = "./dist"
 [[d1_databases]]
 binding = "DB"
 database_name = "games"
-database_id = "5b939166-a476-4e6e-b2f7-fa772cb5e9b0"
+database_id = "914a3d1a-9dcb-430a-9dba-8b8372ce03ae"
 preview_database_id = "DB"
 
 # [ai]
