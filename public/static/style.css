@@ -56,6 +56,7 @@ section {
   padding-top: var(--size-3);
 }
 #saved-links-key h4 {
+  font-size: var(--scale-fluid-1);
   font-weight: 300;
   margin: 0;
   display: flex;
@@ -94,7 +95,7 @@ section {
   align-self: center;
 }
 #savedGamesContainer li:hover {
-  background: rgb(54, 54, 54);
+  background: rgb(254, 254, 254);
 }
 #savedGamesContainer li:hover #deleteButton {
   opacity: 1;
@@ -155,6 +156,15 @@ hr {
     0px 4px 4px rgba(0, 0, 0, 0.08),
     0px 10px 6px rgba(0, 0, 0, 0.05),
     0px 17px 7px rgba(0, 0, 0, 0.01);
+}
+@media only screen and (max-width: 440px) {
+  section {
+    margin: 0 auto;
+    width: 92.5%;
+  }
+  hr {
+    width: 90%;
+  }
 }
 
 /* Category Gallery */
@@ -261,6 +271,62 @@ hr {
 }
 .category-game-item:hover button {
   opacity: 0.5;
+}
+
+@media only screen and (max-width: 440px) {
+  #category-section-key {
+    display: none;
+  }
+  .category-game-item {
+    font-size: var(--scale-2);
+    font-weight: 400;
+    letter-spacing: -0.5px;
+
+    display: flex;
+    align-content: center;
+
+    border-radius: var(--radius-xs);
+
+    margin-right: var(--size-2);
+    margin-bottom: var(--size-3);
+
+    white-space: nowrap;
+    overflow: hidden;
+
+    opacity: 0;
+    animation: fade-in 500ms forwards;
+    animation-delay: calc(0.05s * var(--i));
+
+    background: linear-gradient(180deg, #f7f7f7 0%, #ededed 91.18%);
+    box-shadow:
+      0px 1px 2px rgba(0, 0, 0, 0.1),
+      0px 4px 4px rgba(0, 0, 0, 0.08),
+      0px 10px 6px rgba(0, 0, 0, 0.05),
+      0px 17px 7px rgba(0, 0, 0, 0.01),
+      0px 1px 0px rgba(32, 32, 32, 0.1),
+      0px 0px 0px 1px rgba(32, 32, 32, 0.25),
+      inset 0px 1px 0px #ffffff,
+      inset 0px 0px 0px 1px rgba(255, 255, 255, 0.5) !important;
+    border-radius: 20px;
+  }
+  .category-game-item img {
+    margin-top: var(--size-1);
+    margin-bottom: var(--size-1);
+    margin-left: var(--size-1);
+    height: var(--size-5);
+    padding-left: var(--size-1);
+    padding-right: var(--size-1);
+    mix-blend-mode: color-burn;
+  }
+  .category-game-item a {
+    margin-top: var(--size-1);
+    margin-right: var(--size-2);
+    margin-bottom: var(--size-1);
+    line-height: var(--size-5);
+  }
+  .category-game-item button {
+    display: none;
+  }
 }
 
 /* Search */
