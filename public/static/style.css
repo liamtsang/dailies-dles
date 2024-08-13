@@ -1,6 +1,13 @@
 :root {
   --text-color: #1c1c1c;
   --background-color: #fbfbfb;
+  --red-display: flex;
+  --orange-display: flex;
+  --yellow-display: flex;
+  --green-display: flex;
+  --cyan-display: flex;
+  --blue-display: flex;
+  --purple-display: flex;
 }
 html,
 body {
@@ -31,7 +38,6 @@ section {
 }
 
 .draggable {
-  cursor: move;
   touch-action: none;
   user-select: none;
   z-index: 10;
@@ -78,6 +84,13 @@ section {
 }
 #savedGamesContainer:empty {
   outline: 2px dotted lightgrey;
+  background-image: url('dnd_bg.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin-bottom: var(--scale-3);
+  /* min-height: 200px; */
+  min-height: calc(var(--scale-9)*2);
 }
 #savedGamesContainer li {
   list-style-type: none;
@@ -90,7 +103,7 @@ section {
 
   opacity: 0;
   animation: fade-in 500ms forwards;
-  animation-delay: calc(0.05s * var(--i));
+  animation-delay: calc(0.00000001s * var(--i));
 }
 #savedGamesContainer li img {
   height: var(--scale-4);
@@ -215,7 +228,7 @@ hr {
   margin-top: var(--size-1);
   margin-bottom: var(--size-2);
 }
-.category-gallery {
+#category-gallery {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
@@ -236,9 +249,9 @@ hr {
   white-space: nowrap;
   overflow: hidden;
 
-  opacity: 0;
-  animation: fade-in 500ms forwards;
-  animation-delay: calc(0.05s * var(--i));
+  /* opacity: 0; */
+  /* animation: fade-in 500ms forwards; */
+  /* animation-delay: calc(0.05s * var(--i)); */
 
   background: linear-gradient(180deg, #f7f7f7 0%, #ededed 91.18%);
   box-shadow:
@@ -267,7 +280,15 @@ hr {
   margin-right: var(--size-1);
   line-height: var(--size-9);
 }
+
+
+/* 
+USING DISPLAY NONE ON THE BUTTON AS A HACK TO PREVENT HAVING TO REWRITE CODE
+*/
 .category-game-item button {
+  display:none;
+
+  
   border: none;
   border-radius: 2px;
   opacity: 0;
@@ -389,6 +410,7 @@ a {
 }
 
 .red-category-button {
+  display: var(--red-display);
   background: linear-gradient(
     180deg,
     rgba(255, 59, 48, 0.35) 0%,
@@ -405,6 +427,7 @@ a {
     inset 0px 0px 0px 1px rgba(255, 59, 48, 0.5);
 }
 .orange-category-button {
+  display: var(--orange-display);
   background: linear-gradient(
     180deg,
     rgba(255, 149, 0, 0.35) 0%,
@@ -421,6 +444,7 @@ a {
     inset 0px 0px 0px 1px rgba(255, 149, 0, 0.5);
 }
 .yellow-category-button {
+  display: var(--yellow-display);
   background: linear-gradient(
     180deg,
     rgba(255, 204, 0, 0.35) 0%,
@@ -437,6 +461,7 @@ a {
     inset 0px 0px 0px 1px rgba(255, 204, 0, 0.5);
 }
 .green-category-button {
+  display: var(--green-display);
   background: linear-gradient(
     180deg,
     rgba(52, 199, 89, 0.35) 0%,
@@ -453,6 +478,7 @@ a {
     inset 0px 0px 0px 1px rgba(52, 199, 89, 0.780392);
 }
 .cyan-category-button {
+  display: var(--cyan-display);
   background: linear-gradient(
     180deg,
     rgba(0, 199, 190, 0.35) 0%,
@@ -469,6 +495,7 @@ a {
     inset 0px 0px 0px 1px rgba(0, 199, 190, 0.5);
 }
 .blue-category-button {
+  display: var(--blue-display);
   background: linear-gradient(
     180deg,
     rgba(0, 122, 255, 0.35) 0%,
@@ -485,6 +512,7 @@ a {
     inset 0px 0px 0px 1px rgba(0, 122, 255, 0.5);
 }
 .purple-category-button {
+  display: var(--purple-display);
   background: linear-gradient(
     180deg,
     rgba(175, 82, 222, 0.35) 0%,

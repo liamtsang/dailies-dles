@@ -46,7 +46,6 @@ function draggableMain() {
       clientX = e.clientX;
       clientY = e.clientY;
     }
-    console.log(clientX + ' ' + clientY)
     const windowHeight = window.innerHeight;
 
     draggedElement.style.position = 'fixed'
@@ -78,9 +77,6 @@ function draggableMain() {
     const timeDiff = endTime - startTime;
     clearInterval(scrollInterval);
     if (!draggedElement) return
-    console.log("Drag end: ")
-    console.log(e.target)
-    console.log(timeDiff +' ' + clickThreshold)
 
     const dropRect = dropZone.getBoundingClientRect()
     const clientX = e.clientX || e.changedTouches[0].clientX
@@ -100,7 +96,6 @@ function draggableMain() {
     }
 
     if (timeDiff < clickThreshold) {
-      console.log(e.target)
       const link = e.target.dataset.link;
       if (link) {
           window.open(link, '_blank');
@@ -119,7 +114,7 @@ function draggableMain() {
 }
 
 document.body.addEventListener('htmx:afterSettle', function (event) {
-  if (event.detail.elt.className === 'category-gallery') {
+  if (event.detail.elt.id === 'category-gallery') {
     draggableMain()
   }
 })

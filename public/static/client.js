@@ -91,3 +91,53 @@ function openLinks() {
 }
 
 init()
+
+// Functions for the category search
+// =================================
+
+function allOtherColors(color) {
+  let categories = ['red','orange','yellow','cyan','blue','purple','green']
+  switch (color) {
+    case 'red':
+      return filteredArray = categories.filter(e => e !== 'red')
+    case 'orange':
+      return filteorangeArray = categories.filter(e => e !== 'orange')
+    case 'yellow':
+      return filteyellowArray = categories.filter(e => e !== 'yellow')
+    case 'cyan':
+      return filtecyanArray = categories.filter(e => e !== 'cyan')
+    case 'blue':
+      return filteblueArray = categories.filter(e => e !== 'blue')
+    case 'purple':
+      return filtepurpleArray = categories.filter(e => e !== 'purple')
+    case 'green':
+      return filtegreenArray = categories.filter(e => e !== 'green')
+  }
+}
+
+let selectedColors = []
+
+function selectColor(color) {
+  const root = document.querySelector(':root')
+  const properties = allOtherColors(color)
+
+  if (selectedColors.includes(color)) {
+    selectedColors = selectedColors.filter(e => e !== color)
+    if (selectedColors.length == 0) {
+      properties.forEach((eachColor) => {
+        root.style.setProperty(`--${eachColor}-display`,'flex')
+      })
+    } else {
+      root.style.setProperty(`--${color}-display`,'none')
+    }
+    return
+  } else {
+    root.style.setProperty(`--${color}-display`,'flex')
+    properties.forEach((eachColor) => {
+      if (!selectedColors.includes(eachColor)) {
+        root.style.setProperty(`--${eachColor}-display`,'none')
+      }
+    })
+    selectedColors.push(color)
+  }
+}

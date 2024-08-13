@@ -39,7 +39,8 @@ app.get('/', (c) => {
             console.log('DOM items got from x-sort')
           }
         }}"
-            ></ul>
+            >
+            </ul>
           </div>
           <form>
             <button id='openLinksButton' type='button' onclick='openLinks()'>
@@ -52,30 +53,30 @@ app.get('/', (c) => {
 
         <section id='category-section'>
           <div id='category-section-key'>
-            <h4>
+            <h4 onclick='selectColor("purple")'>
               WORDS<span>⬤</span>
             </h4>
-            <h4>
+            <h4 onclick='selectColor("red")'>
               GEOGRAPHY<span>⬤</span>
             </h4>
-            <h4>
+            <h4 onclick='selectColor("cyan")'>
               TRIVIA<span>⬤</span>
             </h4>
-            <h4>
+            <h4 onclick='selectColor("orange")'>
               MOVIES<span>⬤</span>
             </h4>
-            <h4>
+            <h4 onclick='selectColor("yellow")'>
               MUSIC<span>⬤</span>
             </h4>
-            <h4>
+            <h4 onclick='selectColor("blue")'>
               VIDEO GAMES<span>⬤</span>
             </h4>
-            <h4>
+            <h4 onclick='selectColor("green")'>
               OTHER<span>⬤</span>
             </h4>
           </div>
           <div
-            class='category-gallery'
+            id='category-gallery'
             hx-get='/all-categories'
             hx-trigger='load'
           ></div>
@@ -93,7 +94,6 @@ function category_to_color(category: String) {
       return 'orange-category-button'
     case 'Music':
       return 'yellow-category-button'
-
     case 'Trivia':
       return 'cyan-category-button'
     case 'Video Games':
@@ -105,7 +105,13 @@ function category_to_color(category: String) {
   }
 }
 
+let htmlReturnCache: string 
+
 app.get('/all-categories', async (c) => {
+  if (htmlReturnCache) {
+    console.log('returned cache')
+    return c.html(htmlReturnCache)
+  }
   try {
     const [...rows] = await c.env.DB.prepare(
       'SELECT * FROM games ORDER BY category'
@@ -126,6 +132,7 @@ app.get('/all-categories', async (c) => {
       `
       htmlReturn += htmlRow
     })
+    htmlReturnCache = htmlReturn
     return c.html(htmlReturn)
   } catch (error) {
     console.log('test' + error)
