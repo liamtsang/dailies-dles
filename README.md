@@ -6,6 +6,9 @@ npm run dev
 ```txt
 npm run deploy
 ```
+Need to Fix:
+  [] Drag vs click input not working when lucia tested
+  [] Maybe make a toggle save / 
 
 Todo:
 Adding list of games
