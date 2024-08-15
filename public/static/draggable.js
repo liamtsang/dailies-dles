@@ -3,7 +3,7 @@ function draggableMain() {
   const dropZone = document.getElementById('savedGamesContainer')
   let draggedElement = null
   let startTime;
-  const clickThreshold = 100;
+  const clickThreshold = 1000;
 
   let initialX, initialY;
   let xOffset = 0, yOffset = 0;

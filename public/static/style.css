@@ -249,6 +249,8 @@ hr {
   white-space: nowrap;
   overflow: hidden;
 
+  cursor: pointer;
+
   /* opacity: 0; */
   /* animation: fade-in 500ms forwards; */
   /* animation-delay: calc(0.05s * var(--i)); */
