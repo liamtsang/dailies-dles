@@ -279,7 +279,7 @@ hr {
 .category-game-item a {
   margin-top: var(--size-2);
   margin-bottom: var(--size-2);
-  margin-right: var(--size-1);
+  margin-right: var(--size-3);
   line-height: var(--size-9);
 }
 
