@@ -234,6 +234,7 @@ hr {
   align-content: center;
 }
 .category-game-item {
+  
   font-size: var(--scale-5);
   font-weight: 400;
   letter-spacing: -0.5px;
@@ -250,10 +251,6 @@ hr {
   overflow: hidden;
 
   cursor: pointer;
-
-  /* opacity: 0; */
-  /* animation: fade-in 500ms forwards; */
-  /* animation-delay: calc(0.05s * var(--i)); */
 
   background: linear-gradient(180deg, #f7f7f7 0%, #ededed 91.18%);
   box-shadow:
@@ -307,6 +304,7 @@ USING DISPLAY NONE ON THE BUTTON AS A HACK TO PREVENT HAVING TO REWRITE CODE
     display: none;
   }
   .category-game-item {
+    animation: none;
     font-size: var(--scale-2);
     font-weight: 400;
     letter-spacing: -0.5px;
@@ -321,10 +319,6 @@ USING DISPLAY NONE ON THE BUTTON AS A HACK TO PREVENT HAVING TO REWRITE CODE
 
     white-space: nowrap;
     overflow: hidden;
-
-    opacity: 0;
-    animation: fade-in 500ms forwards;
-    animation-delay: calc(0.05s * var(--i));
 
     background: linear-gradient(180deg, #f7f7f7 0%, #ededed 91.18%);
     box-shadow:
@@ -531,4 +525,12 @@ a {
     0px 0px 0px 1px rgba(128, 45, 170, 0.25),
     inset 0px 1px 0px #af52de,
     inset 0px 0px 0px 1px rgba(175, 82, 222, 0.5);
+}
+
+@keyframes tilt-shaking {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(0eg); }
+  75% { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
 }

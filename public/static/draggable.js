@@ -5,22 +5,66 @@ function draggableMain() {
   let startTime;
   const clickThreshold = 1000;
 
+  const dragDelay = 1000; // ms
+  let touchTimeout;
+  let isTouching = false;
+  let startX, startY;
+
   let initialX, initialY;
   let xOffset = 0, yOffset = 0;
   let scrollThreshold = 75;
   let scrollInterval;
   const scrollSpeed = 50;
 
+  let longPressTimer;
+  let isLongPress = false;
+
   draggables.forEach((draggable) => {
     draggable.addEventListener('mousedown', dragStart)
-    draggable.addEventListener('touchstart', dragStart, { passive: false })
+    draggable.addEventListener('touchstart', touchStart, { passive: false})
+
   })
 
   document.addEventListener('mousemove', drag)
-  document.addEventListener('touchmove', drag, { passive: false })
+  document.addEventListener('touchmove', touchMove, {passive: false})
 
   document.addEventListener('mouseup', dragEnd)
-  document.addEventListener('touchend', dragEnd)
+  document.addEventListener('touchend', touchEnd)
+
+  function touchStart(e) {
+    startTime = new Date().getTime();
+    draggedElement = this
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isLongPress = false
+    isTouching = true;
+
+    longPressTimer = setTimeout(() => {
+      draggedElement.style.touchAction = 'none';
+      isLongPress = true;
+    }, 500);
+  }
+
+  function touchMove(e) {
+    if (!isTouching) return;
+    console.log('long press' + isLongPress)
+    const deltaY = (e.touches[0].clientY- startY);
+    if (isLongPress) {
+      drag(e);
+    } else {
+      if (Math.abs(deltaY) > 10) {
+        clearTimeout(longPressTimer);
+        window.scrollBy(0, -deltaY);
+        startY = e.touches[0].clientY;
+      }
+    }
+  }
+
+  function touchEnd(e) {
+    clearTimeout(longPressTimer);
+    if (isLongPress) dragEnd(e)
+    isLongPress = false;
+  }
 
   function dragStart(e) {
     startTime = new Date().getTime();
@@ -37,6 +81,7 @@ function draggableMain() {
   }
 
   function drag(e) {
+    e.preventDefault()
     if (!draggedElement) return
 
     if (e.type === 'touchmove') {
@@ -48,9 +93,12 @@ function draggableMain() {
     }
     const windowHeight = window.innerHeight;
 
+
+    draggedElement.style.animation = '0.2s infinite tilt-shaking'
     draggedElement.style.position = 'fixed'
     draggedElement.style.top = clientY - draggedElement.offsetHeight / 2 + 'px'
     draggedElement.style.left = clientX - draggedElement.offsetWidth / 2 + 'px'
+
 
     if (clientY < scrollThreshold) {
       if (!scrollInterval) {
@@ -91,11 +139,13 @@ function draggableMain() {
       runExistingScript(draggedElement)
       draggedElement.style.position = 'static'
       draggedElement.style.opacity = '1'
+      draggedElement.style.animation = 'none'
       draggedElement = null
       return
     }
 
-    if (timeDiff < clickThreshold) {
+    // Open Link
+    if (timeDiff < clickThreshold && deltaY < 50) {
       const link = e.target.dataset.link;
       if (link) {
           window.open(link, '_blank');
@@ -104,6 +154,7 @@ function draggableMain() {
 
     draggedElement.style.position = 'static'
     draggedElement.style.opacity = '1'
+    draggedElement.style.animation = 'none'
     draggedElement = null
   }
 
