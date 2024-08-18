@@ -12,6 +12,7 @@ function draggableMain() {
 
   let initialX, initialY;
   let xOffset = 0, yOffset = 0;
+  let hasScrolled = false
   let scrollThreshold = 75;
   let scrollInterval;
   const scrollSpeed = 50;
@@ -38,6 +39,7 @@ function draggableMain() {
     startY = e.touches[0].clientY;
     isLongPress = false
     isTouching = true;
+    hasScrolled = false;
 
     longPressTimer = setTimeout(() => {
       draggedElement.style.touchAction = 'none';
@@ -47,12 +49,12 @@ function draggableMain() {
 
   function touchMove(e) {
     if (!isTouching) return;
-    console.log('long press' + isLongPress)
-    const deltaY = (e.touches[0].clientY- startY);
+    deltaY = (e.touches[0].clientY- startY);
     if (isLongPress) {
       drag(e);
     } else {
       if (Math.abs(deltaY) > 10) {
+        hasScrolled = true;
         clearTimeout(longPressTimer);
         window.scrollBy(0, -deltaY);
         startY = e.touches[0].clientY;
@@ -62,7 +64,14 @@ function draggableMain() {
 
   function touchEnd(e) {
     clearTimeout(longPressTimer);
-    if (isLongPress) dragEnd(e)
+    if (isLongPress) {
+      dragEnd(e)
+    } else if (!isLongPress && !hasScrolled) {
+      const link = e.target.dataset.link;
+      if (link) {
+          window.open(link, '_blank');
+      }
+    } 
     isLongPress = false;
   }
 
@@ -93,12 +102,10 @@ function draggableMain() {
     }
     const windowHeight = window.innerHeight;
 
-
     draggedElement.style.animation = '0.2s infinite tilt-shaking'
     draggedElement.style.position = 'fixed'
     draggedElement.style.top = clientY - draggedElement.offsetHeight / 2 + 'px'
     draggedElement.style.left = clientX - draggedElement.offsetWidth / 2 + 'px'
-
 
     if (clientY < scrollThreshold) {
       if (!scrollInterval) {
