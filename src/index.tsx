@@ -53,25 +53,25 @@ app.get('/', (c) => {
 
         <section id='category-section'>
           <div id='category-section-key'>
-            <h4 onclick='selectColor("purple")'>
+            <h4 id='purple-key' onclick='selectColor("purple")'>
               WORDS<span>⬤</span>
             </h4>
-            <h4 onclick='selectColor("red")'>
+            <h4 id='red-key' onclick='selectColor("red")'>
               GEOGRAPHY<span>⬤</span>
             </h4>
-            <h4 onclick='selectColor("cyan")'>
+            <h4 id='cyan-key' onclick='selectColor("cyan")'>
               TRIVIA<span>⬤</span>
             </h4>
-            <h4 onclick='selectColor("orange")'>
+            <h4 id='orange-key' onclick='selectColor("orange")'>
               MOVIES<span>⬤</span>
             </h4>
-            <h4 onclick='selectColor("yellow")'>
+            <h4 id='yellow-key' onclick='selectColor("yellow")'>
               MUSIC<span>⬤</span>
             </h4>
-            <h4 onclick='selectColor("blue")'>
+            <h4 id='blue-key' onclick='selectColor("blue")'>
               VIDEO GAMES<span>⬤</span>
             </h4>
-            <h4 onclick='selectColor("green")'>
+            <h4 id='green-key' onclick='selectColor("green")'>
               OTHER<span>⬤</span>
             </h4>
           </div>

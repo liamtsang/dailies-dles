@@ -118,21 +118,28 @@ function allOtherColors(color) {
 let selectedColors = []
 
 function selectColor(color) {
+  const key = document.getElementById(color + '-key')
   const root = document.querySelector(':root')
   const properties = allOtherColors(color)
 
   if (selectedColors.includes(color)) {
     selectedColors = selectedColors.filter(e => e !== color)
-    if (selectedColors.length == 0) {
+    // Reset to neutral
+    key.style.fontWeight = 'normal'
+    if (selectedColors.length == 0) { 
       properties.forEach((eachColor) => {
         root.style.setProperty(`--${eachColor}-display`,'flex')
       })
+    // Hide just this color
     } else {
+      key.style.fontWeight = 'normal'
       root.style.setProperty(`--${color}-display`,'none')
     }
     return
+  // Display selected color and hide all others
   } else {
     root.style.setProperty(`--${color}-display`,'flex')
+    key.style.fontWeight = 'bold'
     properties.forEach((eachColor) => {
       if (!selectedColors.includes(eachColor)) {
         root.style.setProperty(`--${eachColor}-display`,'none')

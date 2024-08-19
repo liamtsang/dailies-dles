@@ -8,10 +8,9 @@ function draggableMain() {
   const dragDelay = 1000; // ms
   let touchTimeout;
   let isTouching = false;
-  let startX, startY;
 
   let initialX, initialY;
-  let xOffset = 0, yOffset = 0;
+  let deltaY = 0;
   let hasScrolled = false
   let scrollThreshold = 75;
   let scrollInterval;
@@ -35,11 +34,11 @@ function draggableMain() {
   function touchStart(e) {
     startTime = new Date().getTime();
     draggedElement = this
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
     isLongPress = false
     isTouching = true;
     hasScrolled = false;
+    initialX = e.touches[0].clientX
+    initialY = e.touches[0].clientY
 
     longPressTimer = setTimeout(() => {
       draggedElement.style.touchAction = 'none';
@@ -49,14 +48,14 @@ function draggableMain() {
 
   function touchMove(e) {
     if (!isTouching) return;
-    deltaY = (e.touches[0].clientY- startY);
+    deltaY = (e.touches[0].clientY- initialY);
     if (isLongPress) {
       drag(e);
     } else {
       if (Math.abs(deltaY) > 10) {
         hasScrolled = true;
         clearTimeout(longPressTimer);
-        window.scrollBy(0, -deltaY);
+        window.scrollBy(0, -deltaY/10);
         startY = e.touches[0].clientY;
       }
     }
@@ -81,11 +80,11 @@ function draggableMain() {
     draggedElement = this
     this.style.opacity = '0.5'
     if (e.type === 'touchstart') {
-      initialX = e.touches[0].clientX - xOffset;
-      initialY = e.touches[0].clientY - yOffset;
+      initialX = e.touches[0].clientX;
+      initialY = e.touches[0].clientY;
     } else {
-      initialX = e.clientX - xOffset;
-      initialY = e.clientY - yOffset;
+      initialX = e.clientX;
+      initialY = e.clientY;
     }
   }
 
@@ -99,6 +98,7 @@ function draggableMain() {
     } else {
       clientX = e.clientX;
       clientY = e.clientY;
+      deltaY =  e.clientY - initialY;
     }
     const windowHeight = window.innerHeight;
 
@@ -111,14 +111,12 @@ function draggableMain() {
       if (!scrollInterval) {
         scrollInterval = setInterval(() => {
           window.scrollTo(0, window.scrollY - scrollSpeed);
-          yOffset += scrollSpeed;
         }, 20);
       }
     } else if (clientY > windowHeight - scrollThreshold) {
       if (!scrollInterval) {
         scrollInterval = setInterval(() => {
           window.scrollTo(0, window.scrollY + scrollSpeed);
-          yOffset -= scrollSpeed;
         }, 20);
       }
     } else {
@@ -151,6 +149,7 @@ function draggableMain() {
       return
     }
 
+    deltaY = (e.clientY- initialY);
     // Open Link
     if (timeDiff < clickThreshold && deltaY < 50) {
       const link = e.target.dataset.link;
