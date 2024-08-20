@@ -27,6 +27,7 @@ function init() {
 function buildLinkHTML(link, title, i) {
   let linkElement = document.createElement('a')
   let deleteElement = document.createElement('button')
+  let deleteImg = document.createElement('img')
   let liElement = document.createElement('li')
   let imageElement = document.createElement('img')
 
@@ -35,16 +36,16 @@ function buildLinkHTML(link, title, i) {
   linkElement.target = '_blank'
   linkElement.textContent = title
   liElement.style = '--i: ' + i
-  deleteElement.onclick = function () {
+  deleteImg.onclick = function () {
     removeLink(liElement, link)
   }
-  deleteElement.textContent = 'Delete'
-  deleteElement.id = 'deleteButton'
+  deleteImg.id = 'deleteButton'
+  deleteImg.src= '/static/trash.svg'
 
   savedGamesContainer().appendChild(liElement)
   liElement.appendChild(imageElement)
   liElement.appendChild(linkElement)
-  liElement.appendChild(deleteElement)
+  liElement.appendChild(deleteImg)
 }
 
 function addGametoLocalStorage(link, title) {

@@ -35,7 +35,12 @@ export const renderer = jsxRenderer(({ children, title }) => {
 
         <title>{title}</title>
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <footer>
+          made by: <a href="https://www.liamtsang.com" target='_blank'>@liamtsang</a> // submit games to liamtsang@gmail.com
+        </footer>
+      </body>
     </html>
   )
 })

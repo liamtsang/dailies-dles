@@ -36,6 +36,30 @@ section {
   margin: 0 auto;
   width: 75%;
 }
+footer {
+  margin: 0 auto;
+  color: rgba(28, 28, 28,0.4);
+  margin-top: var(--size-6);
+  margin-bottom: var(--size-6);
+  width: 75%;
+}
+footer a {
+  color: rgba(8, 8, 128,0.5);
+}
+@media only screen and (max-width: 440px) {
+  section {
+    margin: 0 auto;
+    width: 92.5%;
+  }
+  footer {
+    margin-top: 0;
+    font-size: var(--size-3);
+    width: 92.5%;
+  }
+  hr {
+    width: 90%;
+  }
+}
 
 .draggable {
   touch-action: none;
@@ -119,6 +143,7 @@ section {
 #deleteButton {
   margin-left: auto;
   opacity: 0;
+  cursor: pointer;
 }
 #openLinksButton {
   font-family: 'General Sans', 'Helvetica', sans-serif;
@@ -173,21 +198,12 @@ hr {
     0px 10px 6px rgba(0, 0, 0, 0.05),
     0px 17px 7px rgba(0, 0, 0, 0.01);
 }
-@media only screen and (max-width: 440px) {
-  section {
-    margin: 0 auto;
-    width: 92.5%;
-  }
-  hr {
-    width: 90%;
-  }
-}
 
 /* Category Gallery */
 #category-section {
   position: relative;
   margin-top: var(--size-8);
-  margin-bottom: var(--size-8);
+  margin-bottom: var(--size-2);
 }
 #category-section-key {
   color: rgb(140, 140, 140);
@@ -389,14 +405,6 @@ td img {
   margin-top: var(--size-2);
 }
 
-footer {
-  position: fixed;
-  bottom: 0;
-  padding-bottom: var(--size-3);
-  background-color: #211c0a;
-  margin-left: calc(var(--size-1) * -2);
-  width: 100%;
-}
 a {
   text-decoration: none;
   color: var(--text-color);
