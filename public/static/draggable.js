@@ -134,6 +134,8 @@ function draggableMain() {
     const dropRect = dropZone.getBoundingClientRect()
     const clientX = e.clientX || e.changedTouches[0].clientX
     const clientY = e.clientY || e.changedTouches[0].clientY
+    deltaY = (e.clientY- initialY);
+    const link = e.target.dataset.link;
 
     if (
       clientX > dropRect.left &&
@@ -147,21 +149,19 @@ function draggableMain() {
       draggedElement.style.animation = 'none'
       draggedElement = null
       return
+    } else if (timeDiff < clickThreshold && Math.abs(deltaY) < 50 && link) {
+      console.log ("opening: deltay=" + deltaY)
+      draggedElement.style.position = 'static'
+      draggedElement.style.opacity = '1'
+      draggedElement.style.animation = 'none'
+      draggedElement = null
+      window.open(link, '_blank');
+    } else {
+      draggedElement.style.position = 'static'
+      draggedElement.style.opacity = '1'
+      draggedElement.style.animation = 'none'
+      draggedElement = null
     }
-
-    deltaY = (e.clientY- initialY);
-    // Open Link
-    if (timeDiff < clickThreshold && deltaY < 50) {
-      const link = e.target.dataset.link;
-      if (link) {
-          window.open(link, '_blank');
-      }
-    }
-
-    draggedElement.style.position = 'static'
-    draggedElement.style.opacity = '1'
-    draggedElement.style.animation = 'none'
-    draggedElement = null
   }
 
   function runExistingScript(itemInfo) {
