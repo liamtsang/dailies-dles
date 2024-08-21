@@ -75,6 +75,10 @@ app.get('/', (c) => {
               OTHER<span>⬤</span>
             </h4>
           </div>
+          <form id='search-form' onsubmit="clientSideSearch(event);return false;">
+            <input id='search-input' placeholder='Search'></input>
+            <button id='search-button'>Search</button>
+          </form>
           <div
             id='category-gallery'
             hx-get='/all-categories'
@@ -116,15 +120,12 @@ app.get('/all-categories', async (c) => {
     const [...rows] = await c.env.DB.prepare(
       'SELECT * FROM games ORDER BY category'
     ).raw()
-    console.log(rows)
     let htmlReturn = ''
-    let i = 0
     rows.map((game) => {
       // 0 Title 1 Link 2 Category 3 Icon
-      i++
       const css = category_to_color(game[2] as string)
       let htmlRow = html`
-        <div data-link='${game[1]}' draggable='true' class="category-game-item draggable ${css}" style='--i: ${i}'>
+        <div data-link='${game[1]}' data-title='${game[0]}' draggable='true' class="category-game-item draggable ${css}">
           <img src="http://www.google.com/s2/favicons?domain=${game[1]}&sz=256"></img>
           <a data-link='${game[1]}'>${game[0]}</a>
           <button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">+</button>
@@ -135,94 +136,7 @@ app.get('/all-categories', async (c) => {
     htmlReturnCache = htmlReturn
     return c.html(htmlReturn)
   } catch (error) {
-    console.log('test' + error)
     return c.text('Error' + error)
-  }
-})
-
-app.get('/category/:cat', async (c) => {
-  const category = c.req.param('cat')
-  try {
-    const [...rows] = await c.env.DB.prepare(
-      'SELECT * FROM games WHERE LOWER(category) LIKE LOWER(?1)'
-    )
-      .bind(category.trim())
-      .raw()
-    console.log(rows)
-    let htmlReturn = ''
-    let i = 0
-    rows.map((game) => {
-      i++
-      // 0 Title 1 Link 2 Category 3 Icon
-      let htmlRow = html`
-        <div class="category-game-item" style='--i: ${i}'>
-          <img src="${game[3]}"></img>
-          <a href='${game[1]}' target='_blank'>${game[0]}</a>
-          <button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">+</button>
-        </div>
-      `
-      htmlReturn += htmlRow
-    })
-    return c.html(htmlReturn)
-  } catch (error) {
-    console.log('test' + error)
-    return c.text('Error' + error)
-  }
-})
-
-app.get('/category-other', async (c) => {
-  try {
-    const [_columns, ...rows] = await c.env.DB.prepare(
-      "SELECT * FROM games WHERE category NOT LIKE '%Geography%' AND category NOT LIKE '%Movies%' AND category NOT LIKE '%Music%' AND category NOT LIKE '%Trivia%'  AND category NOT LIKE '%Video Games%' AND category NOT LIKE '%Word%'"
-    ).raw()
-    let htmlReturn = ''
-    rows.map((game) => {
-      // 0 Title 1 Link 2 Category 3 Icon
-      let htmlRow = html`
-        <div class="category-game-item">
-          <img src="${game[3]}"></img>
-          <a href='${game[1]}' target='_blank'>${game[0]}</a>
-          <button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">+</button>
-        </div>
-      `
-      htmlReturn += htmlRow
-    })
-    return c.html(htmlReturn)
-  } catch (error) {
-    console.log('test' + error)
-    return c.text('Error' + error)
-  }
-})
-
-app.post('/search', async (c) => {
-  const key = await c.req.parseBody()
-  try {
-    const [_columns, ...rows] = await c.env.DB.prepare(
-      'SELECT * FROM games WHERE name LIKE ?1'
-    )
-      .bind(key.search + '%')
-      .raw({ columnNames: true })
-    console.log('Debug data:')
-    console.log(_columns)
-    console.log(rows)
-    let htmlReturn =
-      '<tr><th></th><th>Name</th><th>Category</th><th>Save</th></tr>'
-    rows.map((game) => {
-      // 0 Title 1 Link 2 Category 3 Icon
-      let htmlRow = html`
-        <div class="category-game-item">
-          <img src="${game[3]}" style="height: 1rem"></img>
-          <a href='${game[1]}' target='_blank'>${game[0]}</a>
-          <h4>${game[2]}</h4>
-          <button id='save-game-button' onclick="addLinkFromSearch('${game[1]}', '${game[0]}', '${game[3]}')">Save</button>
-        </div>
-      `
-      htmlReturn += htmlRow
-    })
-    return c.html(htmlReturn)
-  } catch (error) {
-    console.error('error: ' + error)
-    return c.text('Error')
   }
 })
 

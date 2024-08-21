@@ -149,3 +149,23 @@ function selectColor(color) {
     selectedColors.push(color)
   }
 }
+
+function clientSideSearch(event) {
+  const startTime = Date.now() // Benchmark
+  const input = event.target[0].value
+  const categoryGallery = document.getElementById('category-gallery')
+  if (input == '') {
+    for (let i=0; i<categoryGallery.children.length-1;i++) {
+      categoryGallery.children[i].style.display = 'flex';
+    }
+    return
+  }
+
+  // -1 for vite thing (might be bad on prod)
+  for (let i=0; i<categoryGallery.children.length-1;i++) {
+    if (categoryGallery.children[i].dataset.title.toLowerCase() != input.toLowerCase()) {
+      categoryGallery.children[i].style.display = 'none';
+    }
+  }
+}
+

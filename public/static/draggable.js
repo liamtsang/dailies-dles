@@ -68,7 +68,8 @@ function draggableMain() {
     } else if (!isLongPress && !hasScrolled) {
       const link = e.target.dataset.link;
       if (link) {
-          window.open(link, '_blank');
+        resetDraggedElement()
+        window.open(link, '_blank')
       }
     } 
     isLongPress = false;
@@ -144,24 +145,22 @@ function draggableMain() {
       clientY < dropRect.bottom
     ) {
       runExistingScript(draggedElement)
-      draggedElement.style.position = 'static'
-      draggedElement.style.opacity = '1'
-      draggedElement.style.animation = 'none'
-      draggedElement = null
+      resetDraggedElement()
       return
     } else if (timeDiff < clickThreshold && Math.abs(deltaY) < 50 && link) {
-      console.log ("opening: deltay=" + deltaY)
-      draggedElement.style.position = 'static'
-      draggedElement.style.opacity = '1'
-      draggedElement.style.animation = 'none'
-      draggedElement = null
+      resetDraggedElement()
       window.open(link, '_blank');
     } else {
-      draggedElement.style.position = 'static'
-      draggedElement.style.opacity = '1'
-      draggedElement.style.animation = 'none'
-      draggedElement = null
+      resetDraggedElement()
     }
+  }
+
+  function resetDraggedElement() {
+    draggedElement.style.position = 'static'
+    draggedElement.style.opacity = '1'
+    draggedElement.style.animation = 'none'
+    draggedElement = null
+    clearTimeout(longPressTimer)
   }
 
   function runExistingScript(itemInfo) {

@@ -31,12 +31,10 @@ export const renderer = jsxRenderer(({ children, title }) => {
           defer
           src='https://cdn.jsdelivr.net/npm/alpinejs@3.13.8/dist/cdn.min.js'
         ></script>
-
         <style>
           @import
           url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
         </style>
-
       </head>
       <body>
         {children}

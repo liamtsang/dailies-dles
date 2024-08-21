@@ -43,6 +43,10 @@ footer {
   margin-bottom: var(--size-6);
   width: 75%;
 }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 footer a {
   color: rgba(8, 8, 128,0.5);
 }
@@ -124,10 +128,6 @@ footer a {
 
   font-size: var(--scale-4);
   letter-spacing: -1px;
-
-  opacity: 0;
-  animation: fade-in 500ms forwards;
-  animation-delay: calc(0.00000001s * var(--i));
 }
 #savedGamesContainer li img {
   height: var(--scale-4);
@@ -359,50 +359,22 @@ USING DISPLAY NONE ON THE BUTTON AS A HACK TO PREVENT HAVING TO REWRITE CODE
 }
 
 /* Search */
-#search-input {
-  background: none;
-  font-size: var(--scale-3);
-  width: 100%;
-}
 #search-form {
+  margin-bottom: var(--scale-1);
 }
-#search-emoji {
-  position: absolute;
-  font-size: var(--scale-3);
-  margin-left: calc(var(--scale-5) * -1);
+#search-input {
+  border: none;
+  padding-left: var(--size-1);
+  border-radius: 1px;
+  color:rgba(28, 28, 28,0.6);
+  box-shadow:
+    0px 1px 0px rgba(32, 32, 32, 0.1),
+    0px 0px 0px 1px rgba(32, 32, 32, 0.25),
+    inset 0px 1px 0px #ffffff,
+    inset 0px 0px 0px 1px rgba(255, 255, 255, 0.5) !important;
 }
-#search-results {
-  width: 100%;
-}
-th {
-  text-align: left;
-}
-td {
-  padding-right: var(--size-2);
-}
-td img {
-  padding-right: var(--size-3);
-}
-#custom-input-form h4 {
-  margin: 0;
-  margin-bottom: var(--size-1);
-}
-#custom-input-form input {
-  background: none;
-}
-#clearButton {
-  margin-top: var(--size-2);
-}
-
-a {
-  text-decoration: none;
-  color: var(--text-color);
-}
-
-@keyframes fade-in {
-  to {
-    opacity: 1;
-  }
+#search-button {
+  display:none;
 }
 
 .red-category-button {
