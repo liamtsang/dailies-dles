@@ -69,7 +69,7 @@ function draggableMain() {
       const link = e.target.dataset.link;
       if (link) {
         resetDraggedElement()
-        window.open(link, '_blank')
+        // window.open(link, '_blank')
       }
     } 
     isLongPress = false;
