@@ -127,6 +127,7 @@ function selectColor(color) {
     selectedColors = selectedColors.filter(e => e !== color)
     // Reset to neutral
     key.style.fontWeight = 'normal'
+    key.style.color = 'rgb(140, 140, 140)'
     if (selectedColors.length == 0) { 
       properties.forEach((eachColor) => {
         root.style.setProperty(`--${eachColor}-display`,'flex')
@@ -134,6 +135,7 @@ function selectColor(color) {
     // Hide just this color
     } else {
       key.style.fontWeight = 'normal'
+      key.style.color = 'rgb(140, 140, 140)'
       root.style.setProperty(`--${color}-display`,'none')
     }
     return
@@ -141,6 +143,7 @@ function selectColor(color) {
   } else {
     root.style.setProperty(`--${color}-display`,'flex')
     key.style.fontWeight = 'bold'
+    key.style.color = 'rgb(28, 28, 28)'
     properties.forEach((eachColor) => {
       if (!selectedColors.includes(eachColor)) {
         root.style.setProperty(`--${eachColor}-display`,'none')
@@ -155,15 +158,15 @@ function clientSideSearch(event) {
   const input = event.target[0].value
   const categoryGallery = document.getElementById('category-gallery')
   if (input == '') {
-    for (let i=0; i<categoryGallery.children.length-1;i++) {
+    for (let i=0; i<categoryGallery.children.length;i++) {
       categoryGallery.children[i].style.display = 'flex';
     }
     return
   }
 
   // -1 for vite thing (might be bad on prod)
-  for (let i=0; i<categoryGallery.children.length-1;i++) {
-    if (categoryGallery.children[i].dataset.title.toLowerCase() != input.toLowerCase()) {
+  for (let i=0; i<categoryGallery.children.length;i++) {
+    if (!categoryGallery.children[i].dataset.title.toLowerCase().startsWith(input.toLowerCase())) {
       categoryGallery.children[i].style.display = 'none';
     }
   }

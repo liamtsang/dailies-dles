@@ -31,6 +31,7 @@ main {
   margin: 0 auto;
   max-width: 1280px;
   min-height: 100%;
+  padding-top: var(--size-3);
 }
 section {
   margin: 0 auto;
@@ -42,6 +43,7 @@ footer {
   margin-top: var(--size-6);
   margin-bottom: var(--size-6);
   width: 75%;
+  max-width: 960px;
 }
 a {
   color: inherit;
@@ -61,7 +63,7 @@ footer a {
     width: 92.5%;
   }
   hr {
-    width: 90%;
+    width: 90% !important;
   }
 }
 
@@ -212,7 +214,7 @@ hr {
   position: absolute;
   left: calc(var(--size-10) * -3.35);
   width: calc(var(--size-10) * 3);
-  padding-top: var(--size-3);
+  padding-top: var(--size-0);
 }
 #category-section-key h4 {
   font-weight: 300;
