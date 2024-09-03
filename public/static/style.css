@@ -139,13 +139,17 @@ footer a {
 #savedGamesContainer li:hover {
   background: rgb(254, 254, 254);
 }
-#savedGamesContainer li:hover #deleteButton {
+#savedGamesContainer li:hover .deleteButton {
   opacity: 1;
 }
-#deleteButton {
+.deleteButton {
   margin-left: auto;
   opacity: 0;
   cursor: pointer;
+}
+#saved-games-buttons {
+  display: flex;
+  justify-content: space-between;
 }
 #openLinksButton {
   font-family: 'General Sans', 'Helvetica', sans-serif;
@@ -161,6 +165,7 @@ footer a {
   display: flex;
   justify-content: center;
   white-space: nowrap;
+  align-self: end;
   color: var(--background-color);
 
   background: linear-gradient(
@@ -186,6 +191,19 @@ footer a {
   height: calc(var(--scale-6));
   margin-left: var(--size-3);
   margin-right: var(--size-3);
+}
+#edit-button {
+  margin-top: var(--size-3);
+  padding-left: var(--size-6);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+  color: var(--background-color);
+  align-self: end;
+  height: calc(var(--scale-5));
+  margin-left: var(--size-3);
+  filter: invert(0.8);
 }
 
 hr {

@@ -35,11 +35,13 @@ function buildLinkHTML(link, title, i) {
   linkElement.href = link
   linkElement.target = '_blank'
   linkElement.textContent = title
-  liElement.style = '--i: ' + i
-  deleteImg.onclick = function () {
+  liElement.className = 'savedGameItem'
+  deleteImg.onClick = function (event) {
+    event.stopPropagation();
+    event.preventDefault();
     removeLink(liElement, link)
   }
-  deleteImg.id = 'deleteButton'
+  deleteImg.className = 'deleteButton'
   deleteImg.src= '/static/trash.svg'
 
   savedGamesContainer().appendChild(liElement)
@@ -88,6 +90,36 @@ function openLinks() {
   for (let i = length - 1; i >= 0; i--) {
     let url = savedGamesContainer().children[i].childNodes[1].href
     window.open(url, '_blank')
+  }
+}
+
+// Set li items pointer-events: none
+function toggleEdit() {
+  let deleteButtons = document.getElementsByClassName('deleteButton')
+  let liElements = document.getElementsByClassName('savedGameItem')
+  let editButton = document.getElementById('edit-button')
+  if (!deleteButtons[0]) return 
+
+  if (deleteButtons[0].style.opacity == 0) {
+    for (let i=0; i<deleteButtons.length; i++) {
+      deleteButtons[i].style.setProperty('opacity', 1)
+      deleteButtons[i].style.setProperty('z-index', 999)
+      deleteButtons[i].style.setProperty('pointer-events', 'auto')
+    }
+    for (let i=0; i<liElements.length; i++) {
+      liElements[i].style.setProperty('pointer-events', 'none')
+    }
+    editButton.style.setProperty('filter', 'invert(59%) sepia(94%) saturate(377%) hue-rotate(82deg) brightness(91%) contrast(86%)')
+  } else {
+    for (let i=0; i<deleteButtons.length; i++) {
+      deleteButtons[i].style.setProperty('opacity', 0)
+      deleteButtons[i].style.setProperty('z-index', 1)
+      deleteButtons[i].style.setProperty('pointer-events', 'none')
+    }
+    for (let i=0; i<liElements.length; i++) {
+      liElements[i].style.setProperty('pointer-events', 'auto')
+    }
+    editButton.style.setProperty('filter', 'invert(.8)')
   }
 }
 

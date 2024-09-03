@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { html } from 'hono/html'
 import { renderer } from './renderer'
 
+
 type Bindings = {
   DB: D1Database
   USERNAME: string
@@ -25,28 +26,31 @@ app.get('/', (c) => {
               id='savedGamesContainer'
               x-sort='handle'
               x-sort:config="{
-        group: 'localStorage-example',
-        store: {
-          get: function (sortable) {
-            console.log('DOM items got from x-sort')
-            var order = localStorage.getItem(sortable.options.group.name);
-            return order ? order.split('|') : [];
-          },
+                group: 'localStorage-example',
+                store: {
+                  get: function (sortable) {
+                    console.log('DOM items got from x-sort on intitialization')
+                    var order = localStorage.getItem(sortable.options.group.name);
+                    return order ? order.split('|') : [];
+                  },
 
-          set: function (sortable) {
-            var order = sortable.toArray();
-            localStorage.setItem(sortable.options.group.name, order.join('|'));
-            console.log('DOM items got from x-sort')
-          }
-        }}"
+                  set: function (sortable) {
+                    var order = sortable.toArray();
+                    localStorage.setItem(sortable.options.group.name, order.join('|'));
+                    console.log('DOM items set into x-sort')
+                  }
+                }}"
             >
             </ul>
           </div>
+          <div id='saved-games-buttons'>
           <form>
             <button id='openLinksButton' type='button' onclick='openLinks()'>
               Open All
             </button>
           </form>
+          <img id='edit-button' src='/static/edit.svg' onclick='toggleEdit()'/>
+          </div>
         </section>
 
         <hr></hr>

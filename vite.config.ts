@@ -11,6 +11,5 @@ export default defineConfig({
       adapter,
     }),
     build(),
-    viteCompression()
   ]
 })
